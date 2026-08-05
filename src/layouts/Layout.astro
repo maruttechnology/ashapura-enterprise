@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { 
+	title = "Ashapura Enterprise | Stockiest & Dealers of Mild Steel & Re-rolling Products", 
+	description = "Ashapura Enterprise is Ahmedabad's trusted stockiest and dealer of premium-quality mild steel (MS) angles, pipes, bright bars, channels, round bars, flat bars, and customized re-rolling products."
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="bg-page-bg text-text-primary">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<!-- SEO Meta Tags -->
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="robots" content="index, follow" />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+
+		<!-- Google Fonts preconnect & stylesheets -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+		
+		<!-- Astro View Transitions -->
+		<ClientRouter />
+	</head>
+	<body class="bg-page-bg text-text-primary font-body antialiased min-h-screen flex flex-col">
+		<slot />
+	</body>
+</html>

@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme {
+  --color-page-bg: oklch(0.17 0.01 30);
+  --color-panel-bg: oklch(0.22 0.012 30);
+  --color-inset-bg: oklch(0.14 0.008 30);
+  --color-border-hairline: oklch(0.32 0.02 30 / 0.6);
+  --color-text-primary: oklch(0.96 0.005 60);
+  --color-text-muted: oklch(0.75 0.02 40);
+  --color-text-secondary: oklch(0.65 0.02 40);
+  --color-accent-vermillion: oklch(0.62 0.24 29);
+  --color-accent-gold: oklch(0.8 0.17 70);
+
+  --font-display: 'Bricolage Grotesque', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+}
+
+/* Custom Base Styles */
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-page-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  scroll-behavior: smooth;
+}
+
+/* Custom Selection Highlight */
+::selection {
+  background-color: var(--color-accent-vermillion);
+  color: #ffffff;
+}
+
+/* Custom Animations */
+@keyframes heroUp {
+  from {
+    opacity: 0;
+    transform: translateY(36px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatBlob {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(30px, -20px) scale(1.08);
+  }
+}
+
+.animate-hero-up {
+  animation: heroUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-float-blob {
+  animation: floatBlob 12s ease-in-out infinite;
+}
+
+.animate-float-blob-reverse {
+  animation: floatBlob 14s ease-in-out infinite reverse;
+}
