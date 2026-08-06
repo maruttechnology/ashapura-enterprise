@@ -38,31 +38,40 @@ const { Content } = await render(product);
       
       <!-- Left Column: Gallery / Photo slots -->
       <div class="flex flex-col gap-6">
-        <!-- Main Product Image Placeholder -->
+        <!-- Main Product Image -->
         <div 
-          class="relative h-[440px] bg-panel-bg border border-border-hairline flex items-center justify-center overflow-hidden"
+          class="relative h-[440px] bg-panel-bg border border-border-hairline overflow-hidden group"
           style={`view-transition-name: product-card-${product.id};`}
         >
-          <!-- Diagonal stripes pattern -->
-          <div class="absolute inset-0 bg-[repeating-linear-gradient(45deg,oklch(0.26_0.014_30)_0px,oklch(0.26_0.014_30)_20px,transparent_20px,transparent_40px)] opacity-35"></div>
+          <img 
+            src="/istockphoto-518385254-1024x1024.jpg" 
+            alt={data.name} 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-page-bg via-transparent to-transparent opacity-60"></div>
           
-          <div class="relative text-center px-6">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-accent-gold block mb-2">{data.category}</span>
-            <h1 class="font-display font-extrabold text-3xl md:text-4xl text-text-primary uppercase tracking-tight select-none">
+          <div class="absolute bottom-6 left-6 z-10">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-accent-gold block mb-1">{data.category}</span>
+            <h1 class="font-display font-extrabold text-2xl md:text-3xl text-text-primary uppercase tracking-tight">
               {data.name}
             </h1>
-            <span class="mt-4 inline-block text-[10px] font-mono tracking-widest text-text-secondary uppercase select-none">
-              [ COMPREHENSIVE PRODUCT VIEW ]
-            </span>
           </div>
         </div>
 
         <!-- Thumbnails row -->
         <div class="grid grid-cols-4 gap-4">
-          {[1, 2, 3, 4].map(num => (
-            <div class="relative h-[80px] bg-panel-bg/40 border border-border-hairline flex items-center justify-center overflow-hidden cursor-pointer hover:border-accent-vermillion transition-colors group">
-              <div class="absolute inset-0 bg-[repeating-linear-gradient(45deg,oklch(0.26_0.014_30)_0px,oklch(0.26_0.014_30)_5px,transparent_5px,transparent_10px)] opacity-20"></div>
-              <span class="relative text-[8px] font-mono text-text-secondary select-none">VIEW {num}</span>
+          {[
+            '/istockphoto-518385254-1024x1024.jpg',
+            '/istockphoto-537400206-1024x1024.jpg',
+            '/istockphoto-638272110-1024x1024.jpg',
+            '/istockphoto-646996026-1024x1024.jpg'
+          ].map((imgPath) => (
+            <div class="relative h-[80px] bg-panel-bg/40 border border-border-hairline overflow-hidden cursor-pointer hover:border-accent-vermillion transition-colors group">
+              <img 
+                src={imgPath} 
+                alt="Product thumbnail" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-80"
+              />
             </div>
           ))}
         </div>
