@@ -10,7 +10,7 @@
   --color-text-secondary: oklch(0.65 0.02 40);
   --color-accent-vermillion: oklch(0.62 0.24 29);
   --color-accent-gold: oklch(0.8 0.17 70);
-
+  
   --font-display: 'Bricolage Grotesque', sans-serif;
   --font-body: 'Manrope', sans-serif;
 }
@@ -37,9 +37,8 @@ body {
 @keyframes heroUp {
   from {
     opacity: 0;
-    transform: translateY(36px);
+    transform: translateY(28px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -47,19 +46,16 @@ body {
 }
 
 @keyframes floatBlob {
-
-  0%,
-  100% {
+  0%, 100% {
     transform: translate(0, 0) scale(1);
   }
-
   50% {
-    transform: translate(30px, -20px) scale(1.08);
+    transform: translate(25px, -15px) scale(1.05);
   }
 }
 
 .animate-hero-up {
-  animation: heroUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: heroUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .animate-float-blob {
