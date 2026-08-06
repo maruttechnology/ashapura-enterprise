@@ -1,0 +1,151 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+
+// 1. Generate paths for all product pages
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+  return products.map((product) => ({
+    params: { id: product.id },
+    props: { product }
+  }));
+}
+
+const { product } = Astro.props;
+const { data } = product;
+const { Content } = await render(product);
+---
+
+<Layout 
+  title={`${data.name} | Ashapura Enterprise Steel Dealer`}
+  description={`Find dimensions, grades, and standards for Ashapura Enterprise's ${data.name}. We supply premium steel sections to Ahmedabad and throughout Gujarat.`}
+>
+  <!-- Navigation -->
+  <Navbar />
+
+  <!-- Main Content Space with padding to clear fixed nav -->
+  <main class="flex-grow pt-[130px] pb-24 px-6 md:px-14 max-w-7xl mx-auto w-full">
+    
+    <!-- Back to gallery link -->
+    <a href="/#products" class="inline-flex items-center gap-2 text-sm font-semibold text-accent-gold hover:text-accent-vermillion transition-colors mb-12 group">
+      <span class="group-hover:-translate-x-1 transition-transform">&larr;</span> Back to Product Catalog
+    </a>
+
+    <!-- Detail Grid Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+      
+      <!-- Left Column: Gallery / Photo slots -->
+      <div class="flex flex-col gap-6">
+        <!-- Main Product Image Placeholder -->
+        <div 
+          class="relative h-[440px] bg-panel-bg border border-border-hairline flex items-center justify-center overflow-hidden"
+          style={`view-transition-name: product-card-${product.id};`}
+        >
+          <!-- Diagonal stripes pattern -->
+          <div class="absolute inset-0 bg-[repeating-linear-gradient(45deg,oklch(0.26_0.014_30)_0px,oklch(0.26_0.014_30)_20px,transparent_20px,transparent_40px)] opacity-35"></div>
+          
+          <div class="relative text-center px-6">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-accent-gold block mb-2">{data.category}</span>
+            <h1 class="font-display font-extrabold text-3xl md:text-4xl text-text-primary uppercase tracking-tight select-none">
+              {data.name}
+            </h1>
+            <span class="mt-4 inline-block text-[10px] font-mono tracking-widest text-text-secondary uppercase select-none">
+              [ COMPREHENSIVE PRODUCT VIEW ]
+            </span>
+          </div>
+        </div>
+
+        <!-- Thumbnails row -->
+        <div class="grid grid-cols-4 gap-4">
+          {[1, 2, 3, 4].map(num => (
+            <div class="relative h-[80px] bg-panel-bg/40 border border-border-hairline flex items-center justify-center overflow-hidden cursor-pointer hover:border-accent-vermillion transition-colors group">
+              <div class="absolute inset-0 bg-[repeating-linear-gradient(45deg,oklch(0.26_0.014_30)_0px,oklch(0.26_0.014_30)_5px,transparent_5px,transparent_10px)] opacity-20"></div>
+              <span class="relative text-[8px] font-mono text-text-secondary select-none">VIEW {num}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Right Column: Specs and Info -->
+      <div class="flex flex-col">
+        <!-- Breadcrumb Category tag -->
+        <span class="text-xs font-bold tracking-[0.2em] uppercase text-accent-gold mb-3 block">
+          {data.category}
+        </span>
+        
+        <!-- Product Name -->
+        <h2 
+          class="font-display font-extrabold text-4xl md:text-5xl tracking-tight text-text-primary mb-6"
+          style={`view-transition-name: product-name-${product.id};`}
+        >
+          {data.name}
+        </h2>
+        
+        <!-- Long Description -->
+        <p class="text-base leading-relaxed text-text-muted mb-8">
+          {data.description}
+        </p>
+
+        <!-- Dynamic Markdown content from MD body -->
+        <div class="prose prose-invert max-w-none text-sm text-text-muted mb-10 pb-8 border-b border-border-hairline">
+          <Content />
+        </div>
+
+        <!-- Specifications Table -->
+        <h3 class="font-display font-bold text-lg text-text-primary mb-4">Technical Specifications</h3>
+        <div class="border border-border-hairline/80 mb-10 overflow-hidden" style="border-radius: var(--btn-radius, 10px);">
+          <table class="w-full text-left text-xs">
+            <thead>
+              <tr class="bg-panel-bg border-b border-border-hairline">
+                <th class="p-4 font-bold uppercase tracking-wider text-accent-gold w-1/3">Property</th>
+                <th class="p-4 font-bold uppercase tracking-wider text-accent-gold">Details</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border-hairline/50">
+              <tr>
+                <td class="p-4 font-semibold text-text-primary bg-panel-bg/25">Available Dimensions</td>
+                <td class="p-4 text-text-muted">{data.dimensions}</td>
+              </tr>
+              <tr>
+                <td class="p-4 font-semibold text-text-primary bg-panel-bg/25">Steel Grade</td>
+                <td class="p-4 text-text-muted">{data.grade}</td>
+              </tr>
+              <tr>
+                <td class="p-4 font-semibold text-text-primary bg-panel-bg/25">Governing Standard</td>
+                <td class="p-4 text-text-muted">{data.standard}</td>
+              </tr>
+              <tr>
+                <td class="p-4 font-semibold text-text-primary bg-panel-bg/25">Surface Finish</td>
+                <td class="p-4 text-text-muted">{data.finish}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Dual CTAs -->
+        <div class="flex flex-wrap gap-4">
+          <a 
+            href="/#contact" 
+            class="px-8 py-4 bg-accent-vermillion text-white font-bold text-sm hover:bg-opacity-80 active:scale-98 transition-all text-center flex-1 shadow-lg shadow-black/25"
+            style="border-radius: var(--btn-radius, 10px);"
+          >
+            Request Price Quote
+          </a>
+          <button 
+            onclick="alert('Specifications sheet download started... (Placeholder)')"
+            class="cursor-pointer px-8 py-4 border border-border-hairline text-text-primary font-semibold text-sm hover:border-text-primary active:scale-98 transition-all text-center flex-1"
+            style="border-radius: var(--btn-radius, 10px);"
+          >
+            Download Spec Sheet
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <Footer />
+</Layout>

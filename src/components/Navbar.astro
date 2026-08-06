@@ -1,0 +1,114 @@
+---
+---
+<nav 
+  id="main-nav" 
+  class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-5 md:px-14 transition-all duration-400 bg-transparent border-b border-transparent"
+>
+  <!-- Logo -->
+  <a href="/" class="font-display font-bold text-2xl tracking-tighter text-text-primary hover:text-text-primary transition-colors">
+    ASHAPURA<span class="text-accent-vermillion">.</span>ENTERPRISE
+  </a>
+
+  <!-- Desktop Navigation Links -->
+  <div class="hidden md:flex items-center gap-9">
+    <a href="/#about" class="text-sm font-medium text-text-muted hover:text-accent-gold transition-colors">About</a>
+    <a href="/#products" class="text-sm font-medium text-text-muted hover:text-accent-gold transition-colors">Products</a>
+    <a href="/#industries" class="text-sm font-medium text-text-muted hover:text-accent-gold transition-colors">Industries</a>
+    <a href="/#why" class="text-sm font-medium text-text-muted hover:text-accent-gold transition-colors">Why Us</a>
+    <a href="/#infrastructure" class="text-sm font-medium text-text-muted hover:text-accent-gold transition-colors">Facilities</a>
+    <a href="/#contact" class="text-sm font-medium text-text-muted hover:text-accent-gold transition-colors">Contact</a>
+  </div>
+
+  <!-- Mobile Menu Hamburger Button -->
+  <button 
+    id="mobile-menu-btn" 
+    class="md:hidden flex flex-col justify-center items-end gap-1.5 w-8 h-8 focus:outline-none z-50 cursor-pointer"
+    aria-label="Toggle menu"
+  >
+    <span class="w-6 h-0.5 bg-text-primary transition-all duration-300 origin-center"></span>
+    <span class="w-4 h-0.5 bg-text-primary transition-all duration-300 origin-center"></span>
+    <span class="w-6 h-0.5 bg-text-primary transition-all duration-300 origin-center"></span>
+  </button>
+
+  <!-- Mobile Navigation Drawer Overlay -->
+  <div 
+    id="mobile-menu-drawer" 
+    class="fixed inset-0 w-screen h-screen bg-page-bg/95 backdrop-blur-md z-40 flex flex-col justify-center items-center gap-8 translate-x-full transition-transform duration-300 ease-in-out md:hidden"
+  >
+    <a href="/#about" class="mobile-nav-link text-xl font-bold text-text-primary hover:text-accent-gold transition-colors">About</a>
+    <a href="/#products" class="mobile-nav-link text-xl font-bold text-text-primary hover:text-accent-gold transition-colors">Products</a>
+    <a href="/#industries" class="mobile-nav-link text-xl font-bold text-text-primary hover:text-accent-gold transition-colors">Industries</a>
+    <a href="/#why" class="mobile-nav-link text-xl font-bold text-text-primary hover:text-accent-gold transition-colors">Why Us</a>
+    <a href="/#infrastructure" class="mobile-nav-link text-xl font-bold text-text-primary hover:text-accent-gold transition-colors">Facilities</a>
+    <a href="/#contact" class="mobile-nav-link text-xl font-bold text-text-primary hover:text-accent-gold transition-colors">Contact</a>
+  </div>
+</nav>
+
+<style>
+  /* Scrolled state applied via JS */
+  :global(#main-nav.nav-scrolled) {
+    background-color: oklch(0.17 0.01 30 / 0.5) !important;
+    backdrop-filter: blur(18px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(160%) !important;
+    border-bottom-color: oklch(0.96 0.005 60 / 0.1) !important;
+    box-shadow: 0 12px 32px oklch(0 0 0 / 0.28) !important;
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+  }
+</style>
+
+<script>
+  function initNavbarScroll() {
+    const nav = document.getElementById('main-nav');
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const drawer = document.getElementById('mobile-menu-drawer');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+    if (!nav) return;
+
+    // 1. Scroll handling
+    const handleScroll = () => {
+      if (window.scrollY > 40) {
+        nav.classList.add('nav-scrolled');
+      } else {
+        nav.classList.remove('nav-scrolled');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check immediately on load
+
+    // 2. Mobile menu toggle handling
+    if (mobileBtn && drawer) {
+      let isOpen = false;
+
+      const toggleMenu = () => {
+        isOpen = !isOpen;
+        if (isOpen) {
+          drawer.classList.remove('translate-x-full');
+          mobileBtn.children[0].classList.add('rotate-45', 'translate-y-2');
+          mobileBtn.children[1].classList.add('opacity-0');
+          mobileBtn.children[2].classList.add('-rotate-45', '-translate-y-2');
+          document.body.style.overflow = 'hidden'; // block backdrop scroll
+        } else {
+          drawer.classList.add('translate-x-full');
+          mobileBtn.children[0].classList.remove('rotate-45', 'translate-y-2');
+          mobileBtn.children[1].classList.remove('opacity-0');
+          mobileBtn.children[2].classList.remove('-rotate-45', '-translate-y-2');
+          document.body.style.overflow = '';
+        }
+      };
+
+      mobileBtn.addEventListener('click', toggleMenu);
+      
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          if (isOpen) toggleMenu();
+        });
+      });
+    }
+  }
+
+  // Run on initial page load and on page navigation with View Transitions
+  document.addEventListener('astro:page-load', initNavbarScroll);
+</script>

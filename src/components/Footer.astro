@@ -1,0 +1,55 @@
+---
+const currentYear = new Date().getFullYear();
+---
+<footer class="bg-inset-bg border-t border-border-hairline py-12 px-6 md:px-14">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+    <!-- Branding -->
+    <div class="flex flex-col gap-4">
+      <a href="/" class="font-display font-bold text-2xl tracking-tighter text-text-primary">
+        ASHAPURA<span class="text-accent-vermillion">.</span>ENTERPRISE
+      </a>
+      <p class="text-sm text-text-muted max-w-sm leading-relaxed">
+        Your trusted partner in quality steel solutions. Stockiest and dealers of high-grade mild steel and re-rolling products.
+      </p>
+      <div class="flex gap-4 text-xs font-semibold uppercase tracking-wider text-accent-gold mt-2">
+        <span>Quality</span>
+        <span class="text-border-hairline">•</span>
+        <span>Pricing</span>
+        <span class="text-border-hairline">•</span>
+        <span>Service</span>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="flex flex-col gap-3">
+      <h4 class="font-display font-semibold text-sm tracking-wider uppercase text-text-primary">Navigate</h4>
+      <div class="grid grid-cols-2 gap-2 text-sm">
+        <a href="/#about" class="text-text-muted hover:text-accent-gold transition-colors">About Us</a>
+        <a href="/#products" class="text-text-muted hover:text-accent-gold transition-colors">Our Products</a>
+        <a href="/#industries" class="text-text-muted hover:text-accent-gold transition-colors">Industries</a>
+        <a href="/#why" class="text-text-muted hover:text-accent-gold transition-colors">Why Choose Us</a>
+        <a href="/#infrastructure" class="text-text-muted hover:text-accent-gold transition-colors">Facilities</a>
+        <a href="/#contact" class="text-text-muted hover:text-accent-gold transition-colors">Contact</a>
+      </div>
+    </div>
+
+    <!-- Contact Quick View -->
+    <div class="flex flex-col gap-3">
+      <h4 class="font-display font-semibold text-sm tracking-wider uppercase text-text-primary">Contact</h4>
+      <p class="text-sm text-text-muted leading-relaxed">
+        Odhav GIDC, Ahmedabad, Gujarat, India<br>
+        Email: <a href="mailto:ashapuraenterprise02@gmail.com" class="hover:text-accent-gold transition-colors">ashapuraenterprise02@gmail.com</a>
+      </p>
+      <p class="text-sm text-text-muted">
+        NC Chauhan: <span class="text-text-primary font-semibold">+91 96382 55045</span><br>
+        Narendrasinh: <span class="text-text-primary font-semibold">+91 98250 31940</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="max-w-7xl mx-auto border-t border-border-hairline mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-text-secondary gap-4">
+    <p>&copy; {currentYear} Ashapura Enterprise. All rights reserved.</p>
+    <p>Premium Steel Supply & Re-rolling Solutions</p>
+  </div>
+</footer>
