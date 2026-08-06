@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Carousel from '../components/Carousel.astro';
+import Industries from '../components/Industries.astro';
+import WhyChooseUs from '../components/WhyChooseUs.astro';
+import Infrastructure from '../components/Infrastructure.astro';
+import Certifications from '../components/Certifications.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout>
+	<!-- Navigation -->
+	<Navbar />
+
+	<main class="flex-grow">
+		<!-- Hero Section -->
+		<Hero />
+
+		<!-- About Us & Mission/Vision -->
+		<About />
+
+		<!-- Dynamic Products Carousel -->
+		<Carousel />
+
+		<!-- Expanding Industries Panel -->
+		<Industries />
+
+		<!-- Why Choose Us Accordion -->
+		<WhyChooseUs />
+
+		<!-- Facility/Infrastructure Section -->
+		<Infrastructure />
+
+		<!-- Quality Commitments & Certs -->
+		<Certifications />
+
+		<!-- Contact Form Section -->
+		<ContactForm />
+	</main>
+
+	<!-- Footer -->
+	<Footer />
+</Layout>
