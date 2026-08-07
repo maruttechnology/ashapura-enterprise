@@ -5,18 +5,18 @@
   class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-5 md:px-14 transition-all duration-400 bg-transparent border-b border-transparent"
 >
   <!-- Logo -->
-  <a href="/" class="font-display font-bold text-2xl tracking-tighter text-text-primary hover:text-text-primary transition-colors">
-    ASHAPURA<span class="text-accent-vermillion">.</span>ENTERPRISE
+  <a href="/" class="font-display font-bold text-2xl tracking-tighter text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.22_0.03_250)] transition-colors">
+    ASHAPURA<span class="text-[oklch(0.62_0.19_35)]">.</span>ENTERPRISE
   </a>
 
   <!-- Desktop Navigation Links -->
-  <div class="hidden md:flex items-center gap-9">
-    <a href="/#about" class="text-xs uppercase tracking-widest font-semibold text-text-muted hover:text-accent-gold transition-colors">About</a>
-    <a href="/#products" class="text-xs uppercase tracking-widest font-semibold text-text-muted hover:text-accent-gold transition-colors">Products</a>
-    <a href="/#industries" class="text-xs uppercase tracking-widest font-semibold text-text-muted hover:text-accent-gold transition-colors">Industries</a>
-    <a href="/#why" class="text-xs uppercase tracking-widest font-semibold text-text-muted hover:text-accent-gold transition-colors">Why Us</a>
-    <a href="/#infrastructure" class="text-xs uppercase tracking-widest font-semibold text-text-muted hover:text-accent-gold transition-colors">Facilities</a>
-    <a href="/#contact" class="text-xs uppercase tracking-widest font-semibold text-text-muted hover:text-accent-gold transition-colors">Contact</a>
+  <div class="hidden md:flex items-center gap-8">
+    <a href="/#about" class="text-[14px] font-medium text-[oklch(0.55_0.09_195)] hover:text-[oklch(0.22_0.03_250)] transition-colors">About</a>
+    <a href="/#products" class="text-[14px] font-medium text-[oklch(0.55_0.09_195)] hover:text-[oklch(0.22_0.03_250)] transition-colors">Products</a>
+    <a href="/#industries" class="text-[14px] font-medium text-[oklch(0.55_0.09_195)] hover:text-[oklch(0.22_0.03_250)] transition-colors">Industries</a>
+    <a href="/#why" class="text-[14px] font-medium text-[oklch(0.55_0.09_195)] hover:text-[oklch(0.22_0.03_250)] transition-colors">Why Us</a>
+    <a href="/#infrastructure" class="text-[14px] font-medium text-[oklch(0.55_0.09_195)] hover:text-[oklch(0.22_0.03_250)] transition-colors">Facilities</a>
+    <a href="/#contact" class="px-5.5 py-2.5 bg-[oklch(0.62_0.19_35)] hover:bg-[oklch(0.54_0.19_33)] text-white font-bold text-[14px] rounded-[6px] transition-all shadow-sm shadow-[oklch(0.62_0.19_35)]/20 active:scale-98">Get a Quote</a>
   </div>
 
   <!-- Mobile Menu Hamburger Button -->
@@ -25,40 +25,40 @@
     class="md:hidden flex flex-col justify-center items-end gap-1.5 w-8 h-8 focus:outline-none z-50 cursor-pointer"
     aria-label="Toggle menu"
   >
-    <span class="w-6 h-0.5 bg-text-primary transition-all duration-300 origin-center"></span>
-    <span class="w-4 h-0.5 bg-text-primary transition-all duration-300 origin-center"></span>
-    <span class="w-6 h-0.5 bg-text-primary transition-all duration-300 origin-center"></span>
+    <span class="w-6 h-0.5 bg-[oklch(0.22_0.03_250)] transition-all duration-300 origin-center"></span>
+    <span class="w-4 h-0.5 bg-[oklch(0.22_0.03_250)] transition-all duration-300 origin-center"></span>
+    <span class="w-6 h-0.5 bg-[oklch(0.22_0.03_250)] transition-all duration-300 origin-center"></span>
   </button>
 </nav>
 
 <!-- Backdrop Overlay for Mobile Drawer -->
 <div 
   id="mobile-menu-backdrop" 
-  class="fixed inset-0 bg-black/60 backdrop-blur-xs z-40 opacity-0 pointer-events-none transition-opacity duration-300 md:hidden"
+  class="fixed inset-0 bg-black/40 backdrop-blur-xs z-40 opacity-0 pointer-events-none transition-opacity duration-300 md:hidden"
 ></div>
 
 <!-- Mobile Navigation 80% Side Drawer -->
 <div 
   id="mobile-menu-drawer" 
-  class="fixed top-0 right-0 bottom-0 w-[80%] max-w-xs h-screen bg-[#12151A] border-l border-border-hairline z-45 flex flex-col justify-center items-start px-8 gap-7 translate-x-full transition-transform duration-300 ease-in-out md:hidden shadow-2xl shadow-black"
+  class="fixed top-0 right-0 bottom-0 w-[80%] max-w-xs h-screen bg-[oklch(0.99_0.003_95)] border-l border-[oklch(0.87_0.012_240)] z-45 flex flex-col justify-center items-start px-8 gap-7 translate-x-full transition-transform duration-300 ease-in-out md:hidden shadow-2xl shadow-black/10"
 >
-  <span class="text-[10px] font-mono uppercase tracking-widest text-text-secondary border-b border-border-hairline/60 pb-3 w-full">Navigation</span>
-  <a href="/#about" class="mobile-nav-link text-lg font-bold uppercase tracking-wider text-text-primary hover:text-accent-gold transition-colors">About</a>
-  <a href="/#products" class="mobile-nav-link text-lg font-bold uppercase tracking-wider text-text-primary hover:text-accent-gold transition-colors">Products</a>
-  <a href="/#industries" class="mobile-nav-link text-lg font-bold uppercase tracking-wider text-text-primary hover:text-accent-gold transition-colors">Industries</a>
-  <a href="/#why" class="mobile-nav-link text-lg font-bold uppercase tracking-wider text-text-primary hover:text-accent-gold transition-colors">Why Us</a>
-  <a href="/#infrastructure" class="mobile-nav-link text-lg font-bold uppercase tracking-wider text-text-primary hover:text-accent-gold transition-colors">Facilities</a>
-  <a href="/#contact" class="mobile-nav-link text-lg font-bold uppercase tracking-wider text-text-primary hover:text-accent-gold transition-colors">Contact</a>
+  <span class="text-[11px] font-mono uppercase tracking-widest text-[oklch(0.52_0.07_240)] border-b border-[oklch(0.87_0.012_240)] pb-3 w-full font-semibold">Navigation</span>
+  <a href="/#about" class="mobile-nav-link text-lg font-bold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors">About</a>
+  <a href="/#products" class="mobile-nav-link text-lg font-bold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors">Products</a>
+  <a href="/#industries" class="mobile-nav-link text-lg font-bold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors">Industries</a>
+  <a href="/#why" class="mobile-nav-link text-lg font-bold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors">Why Us</a>
+  <a href="/#infrastructure" class="mobile-nav-link text-lg font-bold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors">Facilities</a>
+  <a href="/#contact" class="mobile-nav-link w-full py-3 text-center bg-[oklch(0.62_0.19_35)] text-white font-bold rounded-[6px] transition-colors">Get a Quote</a>
 </div>
 
 <style>
   /* Scrolled state applied via JS */
   :global(#main-nav.nav-scrolled) {
-    background-color: oklch(0.17 0.01 30 / 0.5) !important;
-    backdrop-filter: blur(17px) saturate(160%) !important;
-    -webkit-backdrop-filter: blur(17px) saturate(160%) !important;
-    border-bottom-color: oklch(0.96 0.005 60 / 0.1) !important;
-    box-shadow: 0 12px 32px oklch(0 0 0 / 0.28) !important;
+    background-color: oklch(0.99 0.003 95 / 0.85) !important;
+    backdrop-filter: blur(16px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+    border-bottom-color: oklch(0.87 0.012 240 / 0.6) !important;
+    box-shadow: 0 4px 20px oklch(0 0 0 / 0.06) !important;
     padding-top: 14px !important;
     padding-bottom: 14px !important;
   }

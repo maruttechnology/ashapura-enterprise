@@ -1,55 +1,21 @@
 ---
 const currentYear = new Date().getFullYear();
 ---
-<footer class="bg-inset-bg border-t border-border-hairline py-12 px-6 md:px-14">
-  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
-    <!-- Branding -->
-    <div class="flex flex-col gap-4">
-      <a href="/" class="font-display font-bold text-2xl tracking-tighter text-text-primary">
-        ASHAPURA<span class="text-accent-vermillion">.</span>ENTERPRISE
-      </a>
-      <p class="text-sm text-text-muted max-w-sm leading-relaxed">
-        Your trusted partner in quality steel solutions. Stockiest and dealers of high-grade mild steel and re-rolling products.
-      </p>
-      <div class="flex gap-4 text-xs font-semibold uppercase tracking-wider text-accent-gold mt-2">
-        <span>Quality</span>
-        <span class="text-border-hairline">•</span>
-        <span>Pricing</span>
-        <span class="text-border-hairline">•</span>
-        <span>Service</span>
-      </div>
+<footer class="bg-[oklch(0.99_0.003_95)]">
+  <!-- Gradient Bottom Bar -->
+  <div class="px-6 md:px-14 lg:px-[80px] py-8 bg-[linear-gradient(100deg,oklch(0.62_0.19_35)_0%,oklch(0.96_0.012_70)_100%)] flex flex-col sm:flex-row justify-between items-center gap-4">
+    <div class="font-display font-bold text-xl text-[oklch(0.22_0.03_250)]">
+      ASHAPURA<span class="text-white">.</span>ENTERPRISE
     </div>
-
-    <!-- Quick Links -->
-    <div class="flex flex-col gap-3">
-      <h4 class="font-display font-semibold text-sm tracking-wider uppercase text-text-primary">Navigate</h4>
-      <div class="grid grid-cols-2 gap-2 text-sm">
-        <a href="/#about" class="text-text-muted hover:text-accent-gold transition-colors">About Us</a>
-        <a href="/#products" class="text-text-muted hover:text-accent-gold transition-colors">Our Products</a>
-        <a href="/#industries" class="text-text-muted hover:text-accent-gold transition-colors">Industries</a>
-        <a href="/#why" class="text-text-muted hover:text-accent-gold transition-colors">Why Choose Us</a>
-        <a href="/#infrastructure" class="text-text-muted hover:text-accent-gold transition-colors">Facilities</a>
-        <a href="/#contact" class="text-text-muted hover:text-accent-gold transition-colors">Contact</a>
-      </div>
+    <div class="text-[13px] text-[oklch(0.22_0.03_250)]/80">
+      &copy; {currentYear} Ashapura Enterprise. All rights reserved.
     </div>
-
-    <!-- Contact Quick View -->
-    <div class="flex flex-col gap-3">
-      <h4 class="font-display font-semibold text-sm tracking-wider uppercase text-text-primary">Contact</h4>
-      <p class="text-sm text-text-muted leading-relaxed">
-        Odhav GIDC, Ahmedabad, Gujarat, India<br>
-        Email: <a href="mailto:ashapuraenterprise02@gmail.com" class="hover:text-accent-gold transition-colors">ashapuraenterprise02@gmail.com</a>
-      </p>
-      <p class="text-sm text-text-muted">
-        NC Chauhan: <span class="text-text-primary font-semibold">+91 96382 55045</span><br>
-        Narendrasinh: <span class="text-text-primary font-semibold">+91 98250 31940</span>
-      </p>
+    <div class="flex gap-5 text-[13px] font-medium text-[oklch(0.22_0.03_250)]">
+      <a href="/#about" class="hover:underline">About</a>
+      <a href="/#products" class="hover:underline">Products</a>
+      <a href="/#industries" class="hover:underline">Industries</a>
+      <a href="/#contact" class="hover:underline">Contact</a>
     </div>
-  </div>
-
-  <!-- Bottom Bar -->
-  <div class="max-w-7xl mx-auto border-t border-border-hairline mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-text-secondary gap-4">
-    <p>&copy; {currentYear} Ashapura Enterprise. All rights reserved.</p>
-    <p>Premium Steel Supply & Re-rolling Solutions</p>
   </div>
 </footer>
+
