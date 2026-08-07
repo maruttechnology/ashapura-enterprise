@@ -12,8 +12,8 @@ const reasons = [
     number: "02",
     title: "Transparent Pricing",
     description: "No hidden charges, no unverified weight variances. We maintain open wholesale market rates with clear itemized invoicing.",
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3 3.86 8.708a2.25 2.25 0 0 0 0 3.182l5.708 5.708a2.25 2.25 0 0 0 3.182 0l5.708-5.708a2.25 2.25 0 0 0 0-3.182L12.75 3a2.25 2.25 0 0 0-3.182 0Z" />
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-full h-full">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 3h12M6 8h12M6 8c4 0 7 1.5 7 5s-3 5-7 5h2l6.5 6.5" />
     </svg>`
   },
   {
@@ -51,61 +51,60 @@ const reasons = [
 ];
 ---
 
-<section id="why" class="py-24 bg-[oklch(0.14_0.008_30)] border-b border-border-hairline overflow-hidden">
-  <div class="max-w-7xl mx-auto px-6 md:px-20">
+<section id="why" class="py-20 md:py-[120px] px-6 md:px-14 lg:px-[80px] bg-[oklch(0.955_0.01_240)] overflow-hidden">
+  <div class="max-w-[1280px] mx-auto">
     
     <!-- Title -->
-    <div class="mb-16">
-      <span class="text-xs font-bold tracking-[0.25em] uppercase text-accent-gold mb-4 block">WHY CHOOSE US</span>
-      <h2 class="font-display font-extrabold text-4xl md:text-5xl tracking-tight">
-        Engineered for reliability
+    <div class="max-w-[560px] mb-[56px]">
+      <span class="text-[13px] font-bold tracking-[2px] uppercase text-[oklch(0.52_0.07_240)] mb-[16px] block">WHY CHOOSE US</span>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl md:text-[44px] tracking-[-1px] text-[oklch(0.22_0.03_250)]">
+        The Ashapura Advantage
       </h2>
     </div>
 
     <!-- Accordion Rows Container -->
-    <div id="why-rows-container" class="flex flex-col border-t border-border-hairline/60">
+    <div id="why-rows-container" class="flex flex-col border-t border-[oklch(0.85_0.012_240)]">
       {reasons.map((item, index) => {
         return (
           <div 
-            class="why-row relative flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8 border-b border-border-hairline/60 group cursor-pointer select-none overflow-hidden px-4 py-6 md:px-9 md:py-[26px]"
+            class="why-row relative flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8 border-b border-[oklch(0.85_0.012_240)] group cursor-pointer select-none overflow-hidden px-4 py-6 md:px-9 md:py-[26px]"
             data-index={index}
           >
             <!-- Mobile Top Header / Desktop Column 1 (Number + Title) -->
             <div class="flex items-center justify-between gap-4 w-full md:w-auto md:min-w-[320px] md:flex-[0_0_auto]">
               <div class="flex items-center gap-3 md:gap-8">
                 <!-- Left: Number -->
-                <div class="why-row-number font-display font-bold text-xs md:text-base text-text-muted min-w-[24px] md:min-w-[38px] transition-colors duration-400">
+                <div class="why-row-number font-display font-bold text-sm md:text-base text-[oklch(0.52_0.07_240)] min-w-[24px] md:min-w-[38px] transition-colors duration-400">
                   {item.number}
                 </div>
 
                 <!-- Title -->
-                <h3 class="why-row-title font-display font-bold text-base md:text-2xl text-text-primary transition-all duration-400">
+                <h3 class="why-row-title font-display font-bold text-lg md:text-[24px] text-[oklch(0.22_0.03_250)] tracking-[-0.5px] transition-all duration-400">
                   {item.title}
                 </h3>
               </div>
 
               <!-- Icon on Mobile Only -->
-              <div class="why-row-icon md:hidden text-text-muted/40 transition-all duration-400 pointer-events-none select-none w-5 h-5 flex-none">
+              <div class="why-row-icon md:hidden text-[oklch(0.62_0.19_35)] transition-all duration-400 pointer-events-none select-none w-6 h-6 flex-none">
                 <Fragment set:html={item.icon} />
               </div>
             </div>
 
             <!-- Middle: Description -->
             <div class="w-full md:w-[400px] lg:w-[440px] md:flex-[0_0_auto] why-row-desc transition-all duration-400 opacity-100 pl-7 md:pl-0">
-              <p class="text-xs md:text-sm text-text-muted leading-relaxed">
+              <p class="text-xs md:text-sm text-[oklch(0.42_0.02_250)] leading-relaxed">
                 {item.description}
               </p>
             </div>
 
-            <!-- Right: Icon on Desktop Only (Flex child on far right, no absolute overlap) -->
-            <div class="why-row-icon hidden md:flex items-center justify-end text-text-muted/25 transition-all duration-400 pointer-events-none select-none w-10 h-10 flex-none">
+            <!-- Right: Icon on Desktop Only -->
+            <div class="why-row-icon hidden md:flex items-center justify-end text-[oklch(0.52_0.07_240)]/40 group-hover:text-[oklch(0.62_0.19_35)] transition-all duration-400 pointer-events-none select-none w-9 h-9 flex-none">
               <Fragment set:html={item.icon} />
             </div>
           </div>
         );
       })}
     </div>
-
   </div>
 </section>
 
@@ -117,22 +116,21 @@ const reasons = [
 
   /* Temporary Sequential Pulse on Scroll */
   .why-row.mobile-pulse {
-    border-bottom-color: oklch(0.62 0.24 29 / 0.5) !important;
+    border-bottom-color: oklch(0.62 0.19 35 / 0.5) !important;
   }
-  .why-row.mobile-pulse .why-row-icon,
   .why-row.mobile-pulse .why-row-number {
-    color: var(--color-accent-vermillion) !important;
+    color: oklch(0.62 0.19 35) !important;
     opacity: 1 !important;
   }
   .why-row.mobile-pulse .why-row-title {
-    color: var(--color-accent-gold) !important;
+    color: oklch(0.22 0.03 250) !important;
   }
 
   /* Media Query for Desktop Interaction Logic */
   @media (min-width: 768px) {
     /* Solo Hovered State (Applied via JS on container hover active) */
     #why-rows-container.has-hovered .why-row {
-      border-bottom-color: oklch(0.32 0.02 30 / 0.2);
+      border-bottom-color: oklch(0.85 0.012 240 / 0.5);
     }
 
     /* When a row is the active hovered one */
@@ -142,28 +140,27 @@ const reasons = [
     }
     
     #why-rows-container.has-hovered .why-row.is-hovered .why-row-title {
-      color: var(--color-accent-gold) !important;
-      font-size: 30px !important; /* 30px equivalent */
+      color: oklch(0.62 0.19 35) !important;
+      font-size: 30px !important;
       font-weight: 700 !important;
     }
 
     #why-rows-container.has-hovered .why-row.is-hovered .why-row-number {
-      color: var(--color-accent-vermillion) !important;
+      color: oklch(0.62 0.19 35) !important;
     }
-    
-    /* Icon hover transition and theme color matching */
+
     #why-rows-container.has-hovered .why-row.is-hovered .why-row-icon {
-      color: var(--color-accent-vermillion) !important;
+      color: oklch(0.62 0.19 35) !important;
       opacity: 1 !important;
     }
 
     /* When other rows collapse around the hovered one */
     #why-rows-container.has-hovered .why-row:not(.is-hovered) {
-      opacity: 0.3 !important;
+      opacity: 0.35 !important;
     }
     #why-rows-container.has-hovered .why-row:not(.is-hovered) .why-row-title {
-      font-size: 22px !important; /* 22px equivalent */
-      color: var(--color-text-muted) !important;
+      font-size: 22px !important;
+      color: oklch(0.42 0.02 250) !important;
     }
 
     #why-rows-container.has-hovered .why-row:not(.is-hovered) .why-row-desc {
