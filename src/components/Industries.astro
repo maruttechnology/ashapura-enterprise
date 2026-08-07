@@ -4,98 +4,135 @@ const industries = [
     number: "01",
     name: "Construction",
     description: "High-rise buildings, residential complexes, commercial developments, and structural frames.",
-    icon: "construction"
+    image: "/istockphoto-646996026-1024x1024.jpg",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5A3.375 3.375 0 0 0 10.125 2.25H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>`
   },
   {
     number: "02",
     name: "Infrastructure",
     description: "Bridges, flyovers, metro rail projects, arterial highways, and public utility structures.",
-    icon: "infrastructure"
+    image: "/istockphoto-518385254-1024x1024.jpg",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h6M9 11.25h6M9 15.75h6" /></svg>`
   },
   {
     number: "03",
     name: "Engineering",
     description: "Heavy machinery bases, industrial plant equipment, transmission towers, and brackets.",
-    icon: "engineering"
+    image: "/istockphoto-638272110-1024x1024.jpg",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 0 1 1.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.27.1.06-.12 1.45l-.774.773a1.125 1.125 0 0 1-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.398.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527a1.125 1.125 0 0 1-1.45-.12l-.773-.774a1.125 1.125 0 0 1-.12-1.45l.527-.737c.25-.349.273-.806.108-1.204-.165-.397-.506-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.108-1.204l-.527-.738a1.125 1.125 0 0 1 .12-1.45l.773-.773a1.125 1.125 0 0 1 1.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.149-.894Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>`
   },
   {
     number: "04",
     name: "Fabrication",
     description: "Custom steel fabrication workshops, industrial enclosures, steel gates, and job works.",
-    icon: "fabrication"
+    image: "/istockphoto-537400206-1024x1024.jpg",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l5.654-4.654m.56-5.653c-.14-.468-.382-.891-.766-1.208l-3.03-2.496m0 0a2.548 2.548 0 1 0-3.586 3.586l3.586-3.586Z" /></svg>`
   },
   {
     number: "05",
     name: "Manufacturing",
     description: "Industrial manufacturing plants, original equipment manufacturers (OEMs), and components.",
-    icon: "manufacturing"
+    image: "/istockphoto-646996026-1024x1024.jpg",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21" /></svg>`
   }
 ];
 ---
 
-<section id="industries" class="py-24 px-6 md:px-14 max-w-7xl mx-auto w-full border-b border-border-hairline">
-  <div class="mb-14">
-    <span class="text-xs font-bold tracking-[0.25em] uppercase text-accent-gold mb-4 block">INDUSTRIES WE SERVE</span>
-    <h2 class="font-display font-extrabold text-4xl md:text-5xl tracking-tight max-w-xl">
-      Supporting critical sectors with premium steel
-    </h2>
-  </div>
+<section id="industries" class="py-20 md:py-[120px] px-6 md:px-14 lg:px-[80px] bg-[oklch(0.99_0.003_95)] overflow-hidden">
+  <div class="max-w-[1280px] mx-auto">
+    
+    <!-- Section Title -->
+    <div class="max-w-[640px] mb-[48px]">
+      <span class="text-[13px] font-bold tracking-[2px] uppercase text-[oklch(0.52_0.07_240)] mb-[16px] block">INDUSTRIES WE SERVE</span>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl md:text-[44px] tracking-[-1px] text-[oklch(0.22_0.03_250)]">
+        Supplying the sectors that build the world
+      </h2>
+    </div>
 
-  <!-- Desktop Version: Expanding Flex Row -->
-  <div class="hidden md:flex h-[520px] gap-4 w-full select-none overflow-hidden">
-    {industries.map((ind, index) => (
-      <div 
-        class={`industry-panel transition-all duration-550 ease-[cubic-bezier(0.22,1,0.36,1)] relative border border-border-hairline overflow-hidden p-8 flex flex-col justify-between group ${index === 0 ? 'flex-[3.2] active bg-panel-bg' : 'flex-1 bg-panel-bg/25'}`}
-        data-index={index}
-      >
-        <!-- Background Overlay Image Placeholder -->
-        <div class="absolute inset-0 bg-[repeating-linear-gradient(45deg,oklch(0.26_0.014_30)_0px,oklch(0.26_0.014_30)_8px,transparent_8px,transparent_16px)] opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none"></div>
+    <!-- Desktop Version: Expanding Bento Row with Industrial Photos & Glassmorphic Badges -->
+    <div class="hidden md:flex h-[540px] gap-3 w-full select-none overflow-hidden rounded-[24px]">
+      {industries.map((ind, index) => (
+        <div 
+          class={`industry-panel transition-all duration-600 ease-[cubic-bezier(0.22,1,0.36,1)] relative border border-white/20 rounded-[24px] overflow-hidden cursor-pointer group ${index === 0 ? 'flex-[3.2] active' : 'flex-1'}`}
+          data-index={index}
+        >
+          <!-- Industrial Background Photo with Smooth Hover Zoom -->
+          <img 
+            src={ind.image} 
+            alt={ind.name} 
+            class="absolute inset-0 w-full h-full object-cover group-[.active]:scale-105 transition-transform duration-700"
+          />
 
-        <!-- Upper Row: Number & Icon/Tag -->
-        <div class="relative z-10 flex justify-between items-start">
-          <span class="font-display font-bold text-sm text-accent-gold">{ind.number}</span>
+          <!-- Dark Gradient Vignette Overlay -->
+          <div class="absolute inset-0 bg-gradient-to-t from-[oklch(0.14_0.02_250)]/95 via-[oklch(0.14_0.02_250)]/60 to-[oklch(0.14_0.02_250)]/30"></div>
           
-          <!-- Icon placeholder (Visible in active state) -->
-          <div class="industry-icon w-10 h-10 rounded-full bg-accent-vermillion/10 flex items-center justify-center text-accent-vermillion transition-all duration-300 opacity-0 scale-90 group-[.active]:opacity-100 group-[.active]:scale-100">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-            </svg>
+          <!-- Stripe Overlay Texture -->
+          <div class="absolute inset-0 bg-[repeating-linear-gradient(135deg,rgba(255,255,255,0.04)_0px,rgba(255,255,255,0.04)_16px,transparent_16px,transparent_32px)] opacity-50"></div>
+
+          <!-- Upper Row: Sector Number & Glassmorphic Icon Badge -->
+          <div class="absolute top-7 left-7 right-7 flex justify-between items-center z-20">
+            <span class="font-display font-bold text-sm tracking-wider text-[oklch(0.7_0.17_40)] bg-black/40 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+              {ind.number}
+            </span>
+
+            <!-- Glassmorphic Icon Badge -->
+            <div class="w-11 h-11 rounded-full bg-white/20 backdrop-blur-md text-white border border-white/30 flex items-center justify-center transition-all duration-300 group-[.active]:bg-[oklch(0.62_0.19_35)] group-[.active]:border-[oklch(0.62_0.19_35)] shadow-md">
+              <Fragment set:html={ind.icon} />
+            </div>
+          </div>
+
+          <!-- Vertical Title (Collapsed State) -->
+          <div class="industry-vertical-name absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none transition-opacity duration-400 group-[.active]:opacity-0 z-20">
+            <h3 class="font-display font-bold text-xl text-white/90 tracking-tight whitespace-nowrap" style="writing-mode: vertical-rl; transform: rotate(180deg);">
+              {ind.name}
+            </h3>
+          </div>
+
+          <!-- Active Panel Details (Expanded State) -->
+          <div class="absolute left-7 right-7 bottom-7 z-20 industry-content transition-all duration-500 transform translate-y-2 opacity-0 group-[.active]:translate-y-0 group-[.active]:opacity-100">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-6 h-[2px] bg-[oklch(0.62_0.19_35)]"></div>
+              <span class="text-xs uppercase tracking-widest text-[oklch(0.7_0.17_40)] font-bold">SECTOR</span>
+            </div>
+            <h3 class="font-display font-bold text-2xl lg:text-3xl text-white mb-3 tracking-tight">
+              {ind.name}
+            </h3>
+            <p class="text-sm text-white/80 leading-relaxed max-w-[300px]">
+              {ind.description}
+            </p>
           </div>
         </div>
+      ))}
+    </div>
 
-        <!-- Middle: Vertical Name (Visible in collapsed state) -->
-        <div class="industry-vertical-name absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 origin-center select-none pointer-events-none transition-all duration-400 group-[.active]:opacity-0 group-[.active]:pointer-events-none">
-          <h3 class="font-display font-bold text-lg text-text-muted tracking-widest whitespace-nowrap" style="writing-mode: vertical-rl; transform: rotate(180deg);">
-            {ind.name}
-          </h3>
-        </div>
+    <!-- Mobile Version: Touch Swipeable Card Slider -->
+    <div class="flex md:hidden gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none py-2 px-1 touch-pan-x">
+      {industries.map((ind) => (
+        <div class="snap-start flex-none w-[280px] h-[360px] rounded-[20px] overflow-hidden relative border border-white/20 shadow-lg flex flex-col justify-between p-6 group">
+          <!-- Background Photo -->
+          <img src={ind.image} alt={ind.name} class="absolute inset-0 w-full h-full object-cover" />
+          <!-- Dark Overlay -->
+          <div class="absolute inset-0 bg-gradient-to-t from-[oklch(0.14_0.02_250)]/95 via-[oklch(0.14_0.02_250)]/70 to-[oklch(0.14_0.02_250)]/40"></div>
 
-        <!-- Lower Panel: Title & Description (Revealed in active state) -->
-        <div class="relative z-10 industry-content transition-all duration-500 transform translate-y-4 opacity-0 group-[.active]:translate-y-0 group-[.active]:opacity-100 pointer-events-none group-[.active]:pointer-events-auto">
-          <h3 class="font-display font-bold text-3xl text-text-primary mb-3">
-            {ind.name}
-          </h3>
-          <p class="text-sm text-text-muted leading-relaxed max-w-md">
-            {ind.description}
-          </p>
-        </div>
-      </div>
-    ))}
-  </div>
+          <!-- Top Row -->
+          <div class="relative z-10 flex justify-between items-center">
+            <span class="font-display font-bold text-xs text-[oklch(0.7_0.17_40)] bg-black/40 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+              {ind.number}
+            </span>
+            <div class="w-10 h-10 rounded-full bg-[oklch(0.62_0.19_35)] text-white flex items-center justify-center shadow-md">
+              <Fragment set:html={ind.icon} />
+            </div>
+          </div>
 
-  <!-- Mobile Version: Clean Stacking Cards -->
-  <div class="flex md:hidden flex-col gap-4">
-    {industries.map((ind) => (
-      <div class="bg-panel-bg border border-border-hairline p-6 flex flex-col gap-3">
-        <div class="flex items-center justify-between border-b border-border-hairline pb-3">
-          <span class="font-display font-bold text-xs text-accent-gold">{ind.number}</span>
-          <h3 class="font-display font-bold text-xl text-text-primary">{ind.name}</h3>
+          <!-- Bottom Details -->
+          <div class="relative z-10">
+            <h3 class="font-display font-bold text-2xl text-white mb-2">{ind.name}</h3>
+            <p class="text-xs text-white/80 leading-relaxed">{ind.description}</p>
+          </div>
         </div>
-        <p class="text-xs text-text-muted leading-relaxed">
-          {ind.description}
-        </p>
-      </div>
-    ))}
+      ))}
+    </div>
+
   </div>
 </section>
 
@@ -106,18 +143,19 @@ const industries = [
 
     panels.forEach((panel) => {
       panel.addEventListener('mouseenter', () => {
-        // Reset all panels to collapsed states
+        // Reset all panels
         panels.forEach((p) => {
-          p.classList.remove('flex-[3.2]', 'active', 'bg-panel-bg');
-          p.classList.add('flex-1', 'bg-panel-bg/25');
+          p.classList.remove('flex-[3.2]', 'active');
+          p.classList.add('flex-1');
         });
 
-        // Expand hovered panel
-        panel.classList.remove('flex-1', 'bg-panel-bg/25');
-        panel.classList.add('flex-[3.2]', 'active', 'bg-panel-bg');
+        // Expand active panel
+        panel.classList.remove('flex-1');
+        panel.classList.add('flex-[3.2]', 'active');
       });
     });
   }
 
   document.addEventListener('astro:page-load', initIndustries);
 </script>
+

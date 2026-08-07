@@ -3,6 +3,9 @@ import { getCollection } from 'astro:content';
 
 const products = await getCollection('products');
 const sortedProducts = products.sort((a, b) => a.data.order - b.data.order);
+// Duplicate products array 3 times for a seamless running banner marquee loop
+const infiniteProducts = [...sortedProducts, ...sortedProducts, ...sortedProducts];
+
 const stockImages = [
   '/istockphoto-518385254-1024x1024.jpg',
   '/istockphoto-537400206-1024x1024.jpg',
@@ -11,246 +14,201 @@ const stockImages = [
 ];
 ---
 
-<section id="products" class="py-24 px-6 md:px-14 bg-inset-bg border-t border-b border-border-hairline">
-  <div class="max-w-7xl mx-auto">
-    <!-- Header with controls -->
-    <div class="flex justify-between items-end mb-12">
-      <div>
-        <span class="text-xs font-bold tracking-[0.25em] uppercase text-accent-gold mb-4 block">OUR PRODUCTS</span>
-        <h2 class="font-display font-extrabold text-4xl md:text-5xl tracking-tight">Built for every application</h2>
-      </div>
-      <!-- Navigation arrows -->
-      <div class="flex gap-3">
-        <button 
-          id="prev-btn" 
-          class="cursor-pointer w-12 h-12 border border-border-hairline hover:bg-text-primary hover:text-page-bg transition-colors flex items-center justify-center font-bold text-lg select-none"
-          aria-label="Previous products"
-        >
-          &larr;
-        </button>
-        <button 
-          id="next-btn" 
-          class="cursor-pointer w-12 h-12 border border-border-hairline hover:bg-text-primary hover:text-page-bg transition-colors flex items-center justify-center font-bold text-lg select-none"
-          aria-label="Next products"
-        >
-          &rarr;
-        </button>
-      </div>
+<section id="products" class="py-20 md:py-[120px] bg-[oklch(0.955_0.01_240)] overflow-hidden w-full">
+  <!-- Section Header Container (Max Width Boxed) -->
+  <div class="max-w-[1280px] mx-auto px-6 md:px-14 lg:px-[80px]">
+    <div class="mb-10 text-center sm:text-left">
+      <span class="text-[13px] font-bold tracking-[2px] uppercase text-[oklch(0.52_0.07_240)] mb-[12px] block">OUR PRODUCTS</span>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl md:text-[44px] tracking-[-1px] text-[oklch(0.22_0.03_250)]">Built for every application</h2>
     </div>
+  </div>
 
-    <!-- Product Slider Container -->
-    <div 
-      id="carousel-container" 
-      class="overflow-hidden w-full relative cursor-grab active:cursor-grabbing select-none"
+  <!-- Full Screen Width Edge-to-Edge Running Banner -->
+  <div class="relative w-full group/slider select-none">
+    
+    <!-- Left Glassmorphism Button Above Slider -->
+    <button 
+      id="prev-btn" 
+      class="flex absolute left-4 sm:left-8 lg:left-12 top-1/2 -translate-y-1/2 z-40 cursor-pointer w-12 h-12 rounded-full bg-white/65 backdrop-blur-md border border-white/80 text-[oklch(0.22_0.03_250)] hover:bg-white/95 hover:text-[oklch(0.62_0.19_35)] hover:scale-105 transition-all items-center justify-center text-xl shadow-xl shadow-black/10 active:scale-95 select-none"
+      aria-label="Previous products"
     >
+      &#8592;
+    </button>
+
+    <!-- Right Glassmorphism Button Above Slider -->
+    <button 
+      id="next-btn" 
+      class="flex absolute right-4 sm:right-8 lg:right-12 top-1/2 -translate-y-1/2 z-40 cursor-pointer w-12 h-12 rounded-full bg-white/65 backdrop-blur-md border border-white/80 text-[oklch(0.22_0.03_250)] hover:bg-white/95 hover:text-[oklch(0.62_0.19_35)] hover:scale-105 transition-all items-center justify-center text-xl shadow-xl shadow-black/10 active:scale-95 select-none"
+      aria-label="Next products"
+    >
+      &#8594;
+    </button>
+
+    <!-- Edge-to-Edge 100vw Viewport -->
+    <div id="carousel-viewport" class="overflow-hidden w-full relative touch-pan-y cursor-grab active:cursor-grabbing py-2">
       <div 
         id="carousel-track" 
-        class="flex transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]"
-        style="gap: 24px;"
+        class="flex gap-6 will-change-transform"
       >
-        {sortedProducts.map((product, idx) => {
+        {infiniteProducts.map((product, idx) => {
           const cardImg = stockImages[idx % stockImages.length];
           return (
             <a 
               href={`/products/${product.id}`} 
-              class="carousel-card flex-none w-[calc(100vw-48px)] md:w-[290px] bg-panel-bg border border-border-hairline p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:border-accent-vermillion group"
+              class="carousel-card flex-none w-[270px] sm:w-[310px] bg-white border border-[oklch(0.87_0.012_240)] rounded-[18px] overflow-hidden flex flex-col justify-between shadow-xs transition-shadow"
               data-astro-prefetch
             >
               <div>
-                <!-- Real Product Image Preview -->
-                <div class="relative w-full h-[180px] bg-page-bg border border-border-hairline overflow-hidden mb-6">
+                <!-- Card Image Preview -->
+                <div class="relative w-full h-[195px] bg-[oklch(0.965_0.008_240)] overflow-hidden">
                   <img 
                     src={cardImg} 
                     alt={product.data.name} 
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
+                    class="w-full h-full object-cover"
+                    draggable="false"
                   />
-                  <div class="absolute inset-0 bg-gradient-to-t from-page-bg via-transparent to-transparent opacity-40"></div>
+                  <!-- Category Pill -->
+                  <div class="absolute top-3 left-3 z-20 px-3 py-1 bg-[oklch(0.22_0.03_250)]/85 text-white font-semibold text-[10px] tracking-wider uppercase rounded-full backdrop-blur-xs">
+                    {product.data.category}
+                  </div>
                 </div>
 
                 <!-- Product Details -->
-                <span class="text-[10px] font-bold uppercase tracking-wider text-accent-gold block mb-2">{product.data.category}</span>
-                <h3 class="font-display font-bold text-xl text-text-primary mb-2 group-hover:text-accent-vermillion transition-colors">{product.data.name}</h3>
-                <p class="text-xs text-text-muted leading-relaxed mb-6">{product.data.shortDescription}</p>
-              </div>
-
-              <!-- View details link -->
-              <div class="text-xs font-bold text-accent-gold group-hover:text-accent-vermillion transition-colors flex items-center gap-1.5">
-                View Details <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+                <div class="p-6">
+                  <h3 class="font-display font-bold text-xl text-[oklch(0.22_0.03_250)] mb-2">
+                    {product.data.name}
+                  </h3>
+                  <p class="text-xs text-[oklch(0.5_0.02_250)] leading-relaxed mb-4 line-clamp-2">
+                    {product.data.shortDescription}
+                  </p>
+                  <div class="text-xs font-bold text-[oklch(0.62_0.19_35)] flex items-center gap-1.5">
+                    View Details &rarr;
+                  </div>
+                </div>
               </div>
             </a>
           );
         })}
       </div>
     </div>
-
-    <!-- Dots Pagination Indicators -->
-    <div id="carousel-dots" class="flex justify-center gap-2 mt-8">
-      {sortedProducts.map((_, index) => (
-        <button 
-          class="carousel-dot w-2 h-2 rounded-full bg-border-hairline transition-all duration-300"
-          data-index={index}
-          aria-label={`Go to slide ${index + 1}`}
-        ></button>
-      ))}
-    </div>
   </div>
 </section>
 
 <script>
   function initCarousel() {
-    const container = document.getElementById('carousel-container');
+    const viewport = document.getElementById('carousel-viewport');
     const track = document.getElementById('carousel-track');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
-    const dots = document.querySelectorAll('.carousel-dot');
-    const cards = document.querySelectorAll('.carousel-card');
 
-    if (!container || !track || !prevBtn || !nextBtn || cards.length === 0) return;
+    if (!viewport || !track) return;
 
-    let currentIndex = 0;
-    let autoplayInterval: number | undefined;
-    let startX = 0;
+    const cards = track.querySelectorAll('.carousel-card');
+    if (cards.length === 0) return;
+
+    let position = 0;
+    let speed = 0.6; // pixels per frame for continuous slow crawling
+    let isPaused = false;
     let isDragging = false;
-    let currentTranslate = 0;
-    let prevTranslate = 0;
+    let startX = 0;
+    let startPosition = 0;
+    let animationFrameId: number;
 
-    const gap = 24;
-
-    function getSlideWidth() {
+    const totalUniqueCards = cards.length / 3;
+    
+    function getCardStep() {
       const firstCard = cards[0] as HTMLElement;
-      const cardWidth = firstCard ? firstCard.offsetWidth : 290;
-      return cardWidth + gap;
+      return firstCard ? firstCard.offsetWidth + 24 : 334;
     }
 
-    // Compute maximum scroll limit based on screen width
-    function getVisibleCount() {
-      const containerWidth = container.offsetWidth;
-      return Math.floor(containerWidth / getSlideWidth()) || 1;
+    function getOneSetWidth() {
+      return totalUniqueCards * getCardStep();
     }
 
-    function getMaxIndex() {
-      const visibleCount = getVisibleCount();
-      const maxIndex = cards.length - visibleCount;
-      return maxIndex < 0 ? 0 : maxIndex;
-    }
-
-    function updateCarousel() {
-      const maxIndex = getMaxIndex();
-      
-      // Keep index in boundary
-      if (currentIndex > maxIndex) {
-        currentIndex = 0; // wrap around
-      } else if (currentIndex < 0) {
-        currentIndex = maxIndex; // wrap to end
-      }
-
-      const slideWidth = getSlideWidth();
-      currentTranslate = -currentIndex * slideWidth;
-      track.style.transform = `translateX(${currentTranslate}px)`;
-      prevTranslate = currentTranslate;
-
-      // Update dots indicator active states
-      dots.forEach((dot, idx) => {
-        if (idx === currentIndex) {
-          dot.classList.add('bg-accent-vermillion', 'w-4');
-          dot.classList.remove('bg-border-hairline');
-        } else {
-          dot.classList.remove('bg-accent-vermillion', 'w-4');
-          dot.classList.add('bg-border-hairline');
+    function tick() {
+      if (!isPaused && !isDragging) {
+        position += speed;
+        const setWidth = getOneSetWidth();
+        
+        // Loop endlessly when offset exceeds 1 set width
+        if (position >= setWidth) {
+          position -= setWidth;
+        } else if (position < 0) {
+          position += setWidth;
         }
-      });
-    }
 
-    function nextSlide() {
-      currentIndex++;
-      updateCarousel();
-    }
-
-    function prevSlide() {
-      currentIndex--;
-      updateCarousel();
-    }
-
-    // Autoplay Controls
-    function startAutoplay() {
-      stopAutoplay();
-      autoplayInterval = window.setInterval(nextSlide, 3500);
-    }
-
-    function stopAutoplay() {
-      if (autoplayInterval) {
-        clearInterval(autoplayInterval);
-        autoplayInterval = undefined;
+        track.style.transform = `translateX(${-position}px)`;
       }
+      animationFrameId = requestAnimationFrame(tick);
     }
 
-    // Touch and Drag Actions (Pointer events)
-    container.addEventListener('pointerdown', (e) => {
+    // Manual step scroll for left / right buttons
+    function shiftBy(direction: number) {
+      const step = getCardStep();
+      const setWidth = getOneSetWidth();
+
+      position += direction * step;
+
+      if (position >= setWidth) {
+        position -= setWidth;
+      } else if (position < 0) {
+        position += setWidth;
+      }
+
+      track.style.transition = 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)';
+      track.style.transform = `translateX(${-position}px)`;
+
+      setTimeout(() => {
+        track.style.transition = 'none';
+      }, 500);
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => shiftBy(-1));
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => shiftBy(1));
+    }
+
+    // Pause on hover
+    viewport.addEventListener('mouseenter', () => { isPaused = true; });
+    viewport.addEventListener('mouseleave', () => { isPaused = false; });
+
+    // Touch & Drag Handlers
+    function onPointerDown(e: PointerEvent) {
       isDragging = true;
       startX = e.clientX;
-      stopAutoplay();
-      track.style.transition = 'none'; // Disable transition during drag
-    });
+      startPosition = position;
+      track.style.transition = 'none';
+    }
 
-    window.addEventListener('pointermove', (e) => {
+    function onPointerMove(e: PointerEvent) {
       if (!isDragging) return;
-      const currentX = e.clientX;
-      const diff = currentX - startX;
-      track.style.transform = `translateX(${prevTranslate + diff}px)`;
-    });
-
-    window.addEventListener('pointerup', (e) => {
-      if (!isDragging) return;
-      isDragging = false;
-      track.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
-      
       const diff = e.clientX - startX;
-      
-      // Swipe threshold (50px)
-      if (diff < -50) {
-        nextSlide();
-      } else if (diff > 50) {
-        prevSlide();
-      } else {
-        updateCarousel(); // snap back if threshold not met
-      }
-      
-      startAutoplay();
-    });
+      position = startPosition - diff;
 
-    // Mouse hover pause/resume
-    container.addEventListener('mouseenter', stopAutoplay);
-    container.addEventListener('mouseleave', startAutoplay);
+      const setWidth = getOneSetWidth();
+      if (position >= setWidth) position -= setWidth;
+      if (position < 0) position += setWidth;
 
-    // Button event listeners
-    nextBtn.addEventListener('click', () => {
-      nextSlide();
-      startAutoplay();
-    });
+      track.style.transform = `translateX(${-position}px)`;
+    }
 
-    prevBtn.addEventListener('click', () => {
-      prevSlide();
-      startAutoplay();
-    });
+    function onPointerUp() {
+      isDragging = false;
+    }
 
-    // Dot navigation
-    dots.forEach((dot) => {
-      dot.addEventListener('click', (e) => {
-        const index = parseInt((e.target as HTMLElement).getAttribute('data-index') || '0');
-        currentIndex = index;
-        updateCarousel();
-        startAutoplay();
-      });
-    });
+    viewport.addEventListener('pointerdown', onPointerDown);
+    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerup', onPointerUp);
 
-    // Adjust slide translations on window resize
-    window.addEventListener('resize', updateCarousel);
-
-    // Initial run
-    updateCarousel();
-    startAutoplay();
+    // Start running banner loop
+    animationFrameId = requestAnimationFrame(tick);
   }
 
-  // Load and reload on Page transitions
   document.addEventListener('astro:page-load', initCarousel);
 </script>
+
+
+

@@ -1,36 +1,39 @@
 ---
 const certs = ["ISO 9001:2015 Certified", "ASTM Standard Compliant", "CE Marked Sections", "Mill Test Reports Provided"];
 ---
-<section id="quality" class="py-24 px-6 md:px-14 bg-inset-bg border-b border-border-hairline">
-  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<section id="quality" class="py-20 md:py-[130px] px-6 md:px-14 lg:px-[80px] bg-[oklch(0.99_0.003_95)]">
+  <div class="max-w-[1280px] mx-auto flex flex-col lg:flex-row gap-12 lg:gap-[72px] items-center">
     
-    <!-- Left Column: Real Steel Quality Testing Photo -->
-    <div class="order-2 lg:order-1 relative h-[380px] bg-panel-bg border border-border-hairline overflow-hidden group">
-      <img 
-        src="/istockphoto-646996026-1024x1024.jpg" 
-        alt="Ashapura Enterprise Steel Testing & Quality Assurance" 
-        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-85"
-      />
-      <div class="absolute inset-0 bg-gradient-to-t from-page-bg via-transparent to-transparent opacity-60"></div>
+    <!-- Left Column: Photo Frame with Stripe Texture -->
+    <div class="flex-1 w-full order-2 lg:order-1">
+      <div class="h-[340px] sm:h-[400px] relative bg-[oklch(0.965_0.008_240)] border border-[oklch(0.87_0.012_240)] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-[repeating-linear-gradient(60deg,oklch(0.92_0.012_240)_0px,oklch(0.92_0.012_240)_22px,transparent_22px,transparent_44px)]"></div>
+        <img 
+          src="/istockphoto-646996026-1024x1024.jpg" 
+          alt="Ashapura Enterprise Steel Testing & Quality Assurance" 
+          class="relative z-10 w-full h-full object-cover"
+        />
+      </div>
     </div>
 
-    <!-- Right Column: Details & badges -->
-    <div class="order-1 lg:order-2">
-      <span class="text-xs font-bold tracking-[0.25em] uppercase text-accent-gold mb-4 block">QUALITY & COMMITMENT</span>
-      <h2 class="font-display font-extrabold text-4xl md:text-5xl leading-tight tracking-tight mb-8">
+    <!-- Right Column: Details & Badges -->
+    <div class="flex-1 w-full order-1 lg:order-2">
+      <span class="text-[13px] font-bold tracking-[2px] uppercase text-[oklch(0.52_0.07_240)] mb-[16px] block">
+        QUALITY & COMMITMENT
+      </span>
+      
+      <h2 class="font-display font-bold text-3xl sm:text-4xl md:text-[44px] leading-[1.1] tracking-[-1px] text-[oklch(0.22_0.03_250)] mb-[24px]">
         No compromise on standard specifications
       </h2>
-      <p class="text-text-muted leading-relaxed mb-6 text-base md:text-lg">
-        At Ashapura Enterprise, we ensure that all our structural steel and re-rolled products meet strict industry standards and tolerances. We are committed to delivering premium quality with total honesty and transparency.
-      </p>
-      <p class="text-text-muted leading-relaxed mb-10 text-base md:text-lg">
-        We believe that building strong relationships is based on consistency. Every single batch is checked for chemical and physical specifications, and we supply full Mill Test Certificates with every load.
+
+      <p class="text-[16px] leading-[1.8] text-[oklch(0.42_0.02_250)] mb-[30px]">
+        At Ashapura Enterprise, we ensure that all our structural steel and re-rolled products meet strict industry standards and tolerances. We are committed to delivering premium quality with total honesty and transparency. Every single batch is checked for chemical and physical specifications, and we supply full Mill Test Certificates with every load.
       </p>
 
       <!-- Badges -->
-      <div class="flex flex-wrap gap-3">
+      <div class="flex flex-wrap gap-[14px]">
         {certs.map(cert => (
-          <span class="px-4 py-2 border border-accent-gold/30 bg-accent-gold/5 text-accent-gold text-xs font-semibold uppercase tracking-wider">
+          <span class="px-[18px] py-[11px] border border-[oklch(0.72_0.015_240)] text-[oklch(0.3_0.02_250)] text-[13px] font-semibold">
             {cert}
           </span>
         ))}
@@ -39,3 +42,4 @@ const certs = ["ISO 9001:2015 Certified", "ASTM Standard Compliant", "CE Marked 
 
   </div>
 </section>
+
