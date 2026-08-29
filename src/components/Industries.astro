@@ -1,49 +1,52 @@
 ---
+import { Image } from 'astro:assets';
+import { construction, infrastructure, engineering, welding, manufacturing } from '../assets/stock';
+
 const industries = [
   {
     number: "01",
     name: "Construction",
     description: "High-rise buildings, residential complexes, commercial developments, and structural frames.",
-    image: "/istockphoto-646996026-1024x1024.jpg",
+    image: construction,
     icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5A3.375 3.375 0 0 0 10.125 2.25H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>`
   },
   {
     number: "02",
     name: "Infrastructure",
     description: "Bridges, flyovers, metro rail projects, arterial highways, and public utility structures.",
-    image: "/istockphoto-518385254-1024x1024.jpg",
+    image: infrastructure,
     icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h6M9 11.25h6M9 15.75h6" /></svg>`
   },
   {
     number: "03",
     name: "Engineering",
     description: "Heavy machinery bases, industrial plant equipment, transmission towers, and brackets.",
-    image: "/istockphoto-638272110-1024x1024.jpg",
+    image: engineering,
     icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 0 1 1.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.27.1.06-.12 1.45l-.774.773a1.125 1.125 0 0 1-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.398.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527a1.125 1.125 0 0 1-1.45-.12l-.773-.774a1.125 1.125 0 0 1-.12-1.45l.527-.737c.25-.349.273-.806.108-1.204-.165-.397-.506-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.108-1.204l-.527-.738a1.125 1.125 0 0 1 .12-1.45l.773-.773a1.125 1.125 0 0 1 1.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.149-.894Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>`
   },
   {
     number: "04",
     name: "Fabrication",
     description: "Custom steel fabrication workshops, industrial enclosures, steel gates, and job works.",
-    image: "/istockphoto-537400206-1024x1024.jpg",
+    image: welding,
     icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l5.654-4.654m.56-5.653c-.14-.468-.382-.891-.766-1.208l-3.03-2.496m0 0a2.548 2.548 0 1 0-3.586 3.586l3.586-3.586Z" /></svg>`
   },
   {
     number: "05",
     name: "Manufacturing",
     description: "Industrial manufacturing plants, original equipment manufacturers (OEMs), and components.",
-    image: "/istockphoto-646996026-1024x1024.jpg",
+    image: manufacturing,
     icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21" /></svg>`
   }
 ];
 ---
 
-<section id="industries" class="py-20 md:py-[120px] px-6 md:px-14 lg:px-[80px] bg-[oklch(0.99_0.003_95)] overflow-hidden">
+<section id="industries" class="py-14 md:py-24 px-6 md:px-14 lg:px-[80px] bg-[oklch(0.99_0.003_95)] overflow-hidden">
   <div class="max-w-[1280px] mx-auto">
     
     <!-- Section Title -->
     <div class="max-w-[640px] mb-[48px]">
-      <span class="text-[13px] font-bold tracking-[2px] uppercase text-[oklch(0.52_0.07_240)] mb-[16px] block">INDUSTRIES WE SERVE</span>
+      <span class="text-[13px] font-bold tracking-[2px] uppercase bg-[linear-gradient(95deg,oklch(0.62_0.19_35),oklch(0.52_0.07_240))] bg-clip-text text-transparent mb-[16px] block">INDUSTRIES WE SERVE</span>
       <h2 class="font-display font-bold text-3xl sm:text-4xl md:text-[44px] tracking-[-1px] text-[oklch(0.22_0.03_250)]">
         Supplying the sectors that build the world
       </h2>
@@ -57,10 +60,14 @@ const industries = [
           data-index={index}
         >
           <!-- Industrial Background Photo with Smooth Hover Zoom -->
-          <img 
-            src={ind.image} 
-            alt={ind.name} 
+          <Image
+            src={ind.image}
+            alt={ind.name}
             class="absolute inset-0 w-full h-full object-cover group-[.active]:scale-105 transition-transform duration-700"
+            loading="lazy"
+            decoding="async"
+            widths={[300, 600, 1000]}
+            sizes="(min-width: 768px) 30vw, 100vw"
           />
 
           <!-- Dark Gradient Vignette Overlay -->
@@ -106,11 +113,11 @@ const industries = [
     </div>
 
     <!-- Mobile Version: Touch Swipeable Card Slider -->
-    <div class="flex md:hidden gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none py-2 px-1 touch-pan-x">
+    <div class="flex md:hidden gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none py-2 px-1">
       {industries.map((ind) => (
         <div class="snap-start flex-none w-[280px] h-[360px] rounded-[20px] overflow-hidden relative border border-white/20 shadow-lg flex flex-col justify-between p-6 group">
           <!-- Background Photo -->
-          <img src={ind.image} alt={ind.name} class="absolute inset-0 w-full h-full object-cover" />
+          <Image src={ind.image} alt={ind.name} class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" widths={[280, 560]} sizes="280px" />
           <!-- Dark Overlay -->
           <div class="absolute inset-0 bg-gradient-to-t from-[oklch(0.14_0.02_250)]/95 via-[oklch(0.14_0.02_250)]/70 to-[oklch(0.14_0.02_250)]/40"></div>
 

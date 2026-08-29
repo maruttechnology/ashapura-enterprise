@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c ' *)",
+      "Bash(sips -g hasAlpha /Users/bhavikgajera/Work/Code/astro.config/src/assets/logo.png)",
+      "Bash(pip3 install *)",
+      "Bash(md5 /Users/bhavikgajera/Work/Code/astro.config/src/assets/stock/sheets.jpg /Users/bhavikgajera/Work/Code/astro.config/src/assets/stock/flat-bars-stacked.jpg)",
+      "Bash(curl -s http://localhost:4321/products/square-bars)",
+      "Bash(node -e ' *)",
+      "Bash(sed -i '' \"s/import { engineeringDrafting, channelsAndAngles } from '..\\\\/assets\\\\/stock';/import { engineeringDrafting, channels } from '..\\\\/assets\\\\/stock';/\" src/components/Infrastructure.astro)",
+      "Bash(sed -i '' 's/src={channelsAndAngles}/src={channels}/' src/components/Infrastructure.astro)",
+      "Bash(sed -i '' \"s/import { engineeringDrafting, channels } from '..\\\\/assets\\\\/stock';/import { squareTubesRacked, channels } from '..\\\\/assets\\\\/stock';/\" src/components/Infrastructure.astro)",
+      "Bash(sed -i '' 's/src={engineeringDrafting}/src={squareTubesRacked}/' src/components/Infrastructure.astro)",
+      "Bash(sed -i '' \"s/import { rebarProductionLine } from '..\\\\/assets\\\\/stock';/import { construction } from '..\\\\/assets\\\\/stock';/\" src/components/About.astro)",
+      "Bash(sed -i '' 's/src={rebarProductionLine}/src={construction}/' src/components/About.astro)",
+      "Bash(sed -i '' \"s/import { construction } from '..\\\\/assets\\\\/stock';/import { aboutUs } from '..\\\\/assets\\\\/stock';/\" src/components/About.astro)",
+      "Bash(sed -i '' 's/src={construction}/src={aboutUs}/' src/components/About.astro)",
+      "Bash(sed -i '' \"s/import { squareTubesRacked, channels } from '..\\\\/assets\\\\/stock';/import { squareTubesRacked, godown } from '..\\\\/assets\\\\/stock';/\" src/components/Infrastructure.astro)",
+      "Bash(sed -i '' 's/src={channels}/src={godown}/' src/components/Infrastructure.astro)"
+    ]
+  }
+}

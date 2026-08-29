@@ -1,12 +1,17 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
 ---
-<nav 
-  id="main-nav" 
+<nav
+  id="main-nav"
   class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-5 md:px-14 transition-all duration-400 bg-transparent border-b border-transparent"
 >
   <!-- Logo -->
-  <a href="/" class="font-display font-bold text-2xl tracking-tighter text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.22_0.03_250)] transition-colors">
-    ASHAPURA<span class="text-[oklch(0.62_0.19_35)]">.</span>ENTERPRISE
+  <a href="/" aria-label="Ashapura Enterprise — Home" class="flex items-center gap-2.5">
+    <Image src={logo} alt="" class="h-8 md:h-10 w-auto" widths={[160, 320]} sizes="160px" />
+    <span class="font-display font-bold text-lg md:text-2xl tracking-tighter text-[oklch(0.22_0.03_250)] whitespace-nowrap">
+      Ashapura Enterprise
+    </span>
   </a>
 
   <!-- Desktop Navigation Links -->
@@ -37,18 +42,25 @@
   class="fixed inset-0 bg-black/40 backdrop-blur-xs z-40 opacity-0 pointer-events-none transition-opacity duration-300 md:hidden"
 ></div>
 
-<!-- Mobile Navigation 80% Side Drawer -->
-<div 
-  id="mobile-menu-drawer" 
-  class="fixed top-0 right-0 bottom-0 w-[80%] max-w-xs h-screen bg-[oklch(0.99_0.003_95)] border-l border-[oklch(0.87_0.012_240)] z-45 flex flex-col justify-center items-start px-8 gap-7 translate-x-full transition-transform duration-300 ease-in-out md:hidden shadow-2xl shadow-black/10"
+<!-- Mobile Navigation Side Drawer -->
+<div
+  id="mobile-menu-drawer"
+  class="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm h-screen bg-[oklch(0.99_0.003_95)] border-l border-[oklch(0.87_0.012_240)] z-45 flex flex-col translate-x-full transition-transform duration-300 ease-in-out md:hidden shadow-2xl shadow-black/10"
 >
-  <span class="text-[11px] font-mono uppercase tracking-widest text-[oklch(0.52_0.07_240)] border-b border-[oklch(0.87_0.012_240)] pb-3 w-full font-semibold">Navigation</span>
-  <a href="/#about" class="mobile-nav-link text-lg font-bold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors">About</a>
-  <a href="/#products" class="mobile-nav-link text-lg font-bold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors">Products</a>
-  <a href="/#industries" class="mobile-nav-link text-lg font-bold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors">Industries</a>
-  <a href="/#why" class="mobile-nav-link text-lg font-bold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors">Why Us</a>
-  <a href="/#infrastructure" class="mobile-nav-link text-lg font-bold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors">Facilities</a>
-  <a href="/#contact" class="mobile-nav-link w-full py-3 text-center bg-[oklch(0.62_0.19_35)] text-white font-bold rounded-[6px] transition-colors">Get a Quote</a>
+  <!-- Nav Links (top padding clears the fixed main nav bar above) -->
+  <div class="flex flex-col px-6 pt-24 pb-2">
+    <a href="/#about" class="mobile-nav-link text-base font-semibold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors py-4 border-b border-[oklch(0.92_0.008_240)]">About</a>
+    <a href="/#products" class="mobile-nav-link text-base font-semibold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors py-4 border-b border-[oklch(0.92_0.008_240)]">Products</a>
+    <a href="/#industries" class="mobile-nav-link text-base font-semibold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors py-4 border-b border-[oklch(0.92_0.008_240)]">Industries</a>
+    <a href="/#why" class="mobile-nav-link text-base font-semibold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors py-4 border-b border-[oklch(0.92_0.008_240)]">Why Us</a>
+    <a href="/#infrastructure" class="mobile-nav-link text-base font-semibold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors py-4 border-b border-[oklch(0.92_0.008_240)]">Facilities</a>
+  </div>
+
+  <!-- Bottom-anchored CTA + Quick Contact -->
+  <div class="mt-auto px-6 py-6 border-t border-[oklch(0.87_0.012_240)] flex flex-col gap-3">
+    <a href="/#contact" class="mobile-nav-link w-full py-3.5 text-center bg-[oklch(0.62_0.19_35)] hover:bg-[oklch(0.54_0.19_33)] text-white font-bold text-sm uppercase tracking-wide rounded-[6px] transition-colors">Get a Quote</a>
+    <a href="tel:+919638255045" class="mobile-nav-link w-full py-3 text-center border border-[oklch(0.85_0.012_240)] text-[oklch(0.22_0.03_250)] font-semibold text-sm rounded-[6px] transition-colors">Call Us</a>
+  </div>
 </div>
 
 <style>
@@ -68,9 +80,11 @@
   function initNavbarScroll() {
     const nav = document.getElementById('main-nav');
     const mobileBtn = document.getElementById('mobile-menu-btn');
+    const closeBtn = document.getElementById('mobile-menu-close-btn');
     const drawer = document.getElementById('mobile-menu-drawer');
     const backdrop = document.getElementById('mobile-menu-backdrop');
     const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+    const whatsappFloat = document.getElementById('whatsapp-float-btn');
 
     if (!nav) return;
 
@@ -102,6 +116,9 @@
           mobileBtn.children[1].classList.add('opacity-0');
           mobileBtn.children[2].classList.add('-rotate-45', '-translate-y-2');
           document.body.style.overflow = 'hidden'; // block backdrop scroll
+          if (whatsappFloat) {
+            whatsappFloat.classList.add('opacity-0', 'pointer-events-none', 'scale-90');
+          }
         } else {
           drawer.classList.add('translate-x-full');
           if (backdrop) {
@@ -112,10 +129,14 @@
           mobileBtn.children[1].classList.remove('opacity-0');
           mobileBtn.children[2].classList.remove('-rotate-45', '-translate-y-2');
           document.body.style.overflow = '';
+          if (whatsappFloat) {
+            whatsappFloat.classList.remove('opacity-0', 'pointer-events-none', 'scale-90');
+          }
         }
       };
 
       mobileBtn.addEventListener('click', toggleMenu);
+      if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
       if (backdrop) backdrop.addEventListener('click', toggleMenu);
       
       mobileLinks.forEach(link => {

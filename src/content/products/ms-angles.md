@@ -1,5 +1,5 @@
 ---
-name: "M.S. Angles"
+name: "Angles"
 category: "Angles & Sections"
 shortDescription: "Premium-quality Hot Rolled Mild Steel equal and unequal angles for structural integrity."
 description: "Mild Steel (M.S.) Angles are L-shaped structural steel sections used widely in building construction, bridge manufacturing, industrial structures, and fabrication projects. They provide excellent load-bearing strength and resistance to bending."
