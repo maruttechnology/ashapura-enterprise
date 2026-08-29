@@ -1,5 +1,5 @@
 ---
-name: "M.S. Pipes"
+name: "Pipes"
 category: "Pipes & Tubes"
 shortDescription: "Heavy-duty structural and fluid transmission Mild Steel pipes and hollow sections."
 description: "Mild Steel (M.S.) Pipes are manufactured using low carbon steel and are widely utilized for water, gas, air, and steam transmission, as well as structural applications like scaffolding, handrails, and industrial framing."

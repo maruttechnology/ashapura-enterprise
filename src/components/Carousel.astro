@@ -1,34 +1,84 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import { productImagesById, stockImages } from '../assets/stock';
 
 const products = await getCollection('products');
 const sortedProducts = products.sort((a, b) => a.data.order - b.data.order);
 // Duplicate products array 3 times for a seamless running banner marquee loop
 const infiniteProducts = [...sortedProducts, ...sortedProducts, ...sortedProducts];
-
-const stockImages = [
-  '/istockphoto-518385254-1024x1024.jpg',
-  '/istockphoto-537400206-1024x1024.jpg',
-  '/istockphoto-638272110-1024x1024.jpg',
-  '/istockphoto-646996026-1024x1024.jpg'
-];
 ---
 
-<section id="products" class="py-20 md:py-[120px] bg-[oklch(0.955_0.01_240)] overflow-hidden w-full">
+<section id="products" class="py-14 md:py-24 bg-[oklch(0.955_0.01_240)] overflow-hidden w-full">
   <!-- Section Header Container (Max Width Boxed) -->
   <div class="max-w-[1280px] mx-auto px-6 md:px-14 lg:px-[80px]">
-    <div class="mb-10 text-center sm:text-left">
-      <span class="text-[13px] font-bold tracking-[2px] uppercase text-[oklch(0.52_0.07_240)] mb-[12px] block">OUR PRODUCTS</span>
+    <div class="mb-6 text-center sm:text-left">
+      <span class="text-[13px] font-bold tracking-[2px] uppercase bg-[linear-gradient(95deg,oklch(0.62_0.19_35),oklch(0.52_0.07_240))] bg-clip-text text-transparent mb-[12px] block">OUR PRODUCTS</span>
       <h2 class="font-display font-bold text-3xl sm:text-4xl md:text-[44px] tracking-[-1px] text-[oklch(0.22_0.03_250)]">Built for every application</h2>
+    </div>
+
+    <!-- Quick-Jump Product Chips: skip the sliding carousel, go straight to a product -->
+    <div class="hidden md:flex flex-wrap justify-center sm:justify-start gap-2.5 mb-10">
+      {sortedProducts.map((product) => (
+        <a
+          href={`/products/${product.id}`}
+          data-astro-prefetch
+          class="px-4 py-2 bg-white border border-[oklch(0.85_0.012_240)] hover:border-[oklch(0.62_0.19_35)] hover:text-[oklch(0.62_0.19_35)] text-[oklch(0.42_0.02_250)] text-[13px] font-semibold rounded-full transition-colors"
+        >
+          {product.data.name}
+        </a>
+      ))}
     </div>
   </div>
 
-  <!-- Full Screen Width Edge-to-Edge Running Banner -->
-  <div class="relative w-full group/slider select-none">
-    
+  <!-- Mobile Version: Static 2-Column Grid (no auto-scroll, all products visible without chasing a moving carousel) -->
+  <div class="md:hidden max-w-[1280px] mx-auto px-6">
+    <div class="grid grid-cols-2 gap-4">
+      {sortedProducts.map((product, idx) => {
+        const cardImg = productImagesById[product.id] ?? stockImages[idx % stockImages.length];
+        return (
+          <a
+            href={`/products/${product.id}`}
+            class="bg-white border border-[oklch(0.87_0.012_240)] rounded-[16px] overflow-hidden flex flex-col shadow-xs"
+            data-astro-prefetch
+          >
+            <div class="relative w-full h-[130px] bg-[oklch(0.965_0.008_240)] overflow-hidden">
+              <Image
+                src={cardImg}
+                alt={product.data.name}
+                class="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+                widths={[260, 520]}
+                sizes="(min-width: 640px) 260px, 50vw"
+              />
+              <div class="absolute top-2 left-2 z-20 px-2.5 py-1 bg-[oklch(0.22_0.03_250)]/85 text-white font-semibold text-[9px] tracking-wider uppercase rounded-full backdrop-blur-xs">
+                {product.data.category}
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-display font-bold text-base text-[oklch(0.22_0.03_250)] mb-1">
+                {product.data.name}
+              </h3>
+              <p class="text-[11px] text-[oklch(0.5_0.02_250)] leading-relaxed mb-3 line-clamp-2">
+                {product.data.shortDescription}
+              </p>
+              <div class="text-[11px] font-bold text-[oklch(0.62_0.19_35)] flex items-center gap-1.5">
+                View Details &rarr;
+              </div>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+
+  <!-- Desktop Version: Full Screen Width Edge-to-Edge Running Banner -->
+  <div class="hidden md:block relative w-full group/slider select-none">
+
     <!-- Left Glassmorphism Button Above Slider -->
-    <button 
-      id="prev-btn" 
+    <button
+      id="prev-btn"
       class="flex absolute left-4 sm:left-8 lg:left-12 top-1/2 -translate-y-1/2 z-40 cursor-pointer w-12 h-12 rounded-full bg-white/65 backdrop-blur-md border border-white/80 text-[oklch(0.22_0.03_250)] hover:bg-white/95 hover:text-[oklch(0.62_0.19_35)] hover:scale-105 transition-all items-center justify-center text-xl shadow-xl shadow-black/10 active:scale-95 select-none"
       aria-label="Previous products"
     >
@@ -36,8 +86,8 @@ const stockImages = [
     </button>
 
     <!-- Right Glassmorphism Button Above Slider -->
-    <button 
-      id="next-btn" 
+    <button
+      id="next-btn"
       class="flex absolute right-4 sm:right-8 lg:right-12 top-1/2 -translate-y-1/2 z-40 cursor-pointer w-12 h-12 rounded-full bg-white/65 backdrop-blur-md border border-white/80 text-[oklch(0.22_0.03_250)] hover:bg-white/95 hover:text-[oklch(0.62_0.19_35)] hover:scale-105 transition-all items-center justify-center text-xl shadow-xl shadow-black/10 active:scale-95 select-none"
       aria-label="Next products"
     >
@@ -46,26 +96,30 @@ const stockImages = [
 
     <!-- Edge-to-Edge 100vw Viewport -->
     <div id="carousel-viewport" class="overflow-hidden w-full relative touch-pan-y cursor-grab active:cursor-grabbing py-2">
-      <div 
-        id="carousel-track" 
-        class="flex gap-6 will-change-transform"
+      <div
+        id="carousel-track"
+        class="flex gap-8 will-change-transform"
       >
         {infiniteProducts.map((product, idx) => {
-          const cardImg = stockImages[idx % stockImages.length];
+          const cardImg = productImagesById[product.id] ?? stockImages[idx % stockImages.length];
           return (
-            <a 
-              href={`/products/${product.id}`} 
-              class="carousel-card flex-none w-[270px] sm:w-[310px] bg-white border border-[oklch(0.87_0.012_240)] rounded-[18px] overflow-hidden flex flex-col justify-between shadow-xs transition-shadow"
+            <a
+              href={`/products/${product.id}`}
+              class="carousel-card flex-none w-[340px] lg:w-[380px] bg-white border border-[oklch(0.87_0.012_240)] rounded-[18px] overflow-hidden flex flex-col justify-between shadow-xs transition-shadow"
               data-astro-prefetch
             >
               <div>
                 <!-- Card Image Preview -->
-                <div class="relative w-full h-[195px] bg-[oklch(0.965_0.008_240)] overflow-hidden">
-                  <img 
-                    src={cardImg} 
-                    alt={product.data.name} 
+                <div class="relative w-full h-[240px] bg-[oklch(0.965_0.008_240)] overflow-hidden">
+                  <Image
+                    src={cardImg}
+                    alt={product.data.name}
                     class="w-full h-full object-cover"
                     draggable="false"
+                    loading="lazy"
+                    decoding="async"
+                    widths={[340, 680]}
+                    sizes="380px"
                   />
                   <!-- Category Pill -->
                   <div class="absolute top-3 left-3 z-20 px-3 py-1 bg-[oklch(0.22_0.03_250)]/85 text-white font-semibold text-[10px] tracking-wider uppercase rounded-full backdrop-blur-xs">
@@ -74,14 +128,14 @@ const stockImages = [
                 </div>
 
                 <!-- Product Details -->
-                <div class="p-6">
-                  <h3 class="font-display font-bold text-xl text-[oklch(0.22_0.03_250)] mb-2">
+                <div class="p-7">
+                  <h3 class="font-display font-bold text-2xl text-[oklch(0.22_0.03_250)] mb-2">
                     {product.data.name}
                   </h3>
-                  <p class="text-xs text-[oklch(0.5_0.02_250)] leading-relaxed mb-4 line-clamp-2">
+                  <p class="text-sm text-[oklch(0.5_0.02_250)] leading-relaxed mb-4 line-clamp-2">
                     {product.data.shortDescription}
                   </p>
-                  <div class="text-xs font-bold text-[oklch(0.62_0.19_35)] flex items-center gap-1.5">
+                  <div class="text-sm font-bold text-[oklch(0.62_0.19_35)] flex items-center gap-1.5">
                     View Details &rarr;
                   </div>
                 </div>
@@ -102,6 +156,7 @@ const stockImages = [
     const nextBtn = document.getElementById('next-btn');
 
     if (!viewport || !track) return;
+    if (!window.matchMedia('(min-width: 768px)').matches) return;
 
     const cards = track.querySelectorAll('.carousel-card');
     if (cards.length === 0) return;
