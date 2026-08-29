@@ -1,16 +1,45 @@
 ---
 import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 
 interface Props {
 	title?: string;
 	description?: string;
 }
 
-const { 
-	title = "Ashapura Enterprise | Stockiest & Dealers of Mild Steel & Re-rolling Products", 
-	description = "Ashapura Enterprise is Ahmedabad's trusted stockiest and dealer of premium-quality mild steel (MS) angles, pipes, bright bars, channels, round bars, flat bars, and customized re-rolling products."
+const {
+	title = "Ashapura Enterprise | Stockiest & Dealers of Mild Steel Products",
+	description = "Ashapura Enterprise is Ahmedabad's trusted stockiest and dealer of premium-quality mild steel (MS) angles, pipes, bright bars, channels, round bars, and flat bars."
 } = Astro.props;
+
+const localBusinessSchema = {
+	"@context": "https://schema.org",
+	"@type": "LocalBusiness",
+	"name": "Ashapura Enterprise",
+	"description": description,
+	"telephone": "+91-96382-55045",
+	"email": "ashapuraenterprise02@gmail.com",
+	"address": {
+		"@type": "PostalAddress",
+		"streetAddress": "51/1, GIDC Estate, B/h. Balaji Hotel, Nr. Fire Station, Odhav",
+		"addressLocality": "Ahmedabad",
+		"addressRegion": "Gujarat",
+		"postalCode": "382415",
+		"addressCountry": "IN"
+	},
+	"geo": {
+		"@type": "GeoCoordinates",
+		"latitude": 23.022740,
+		"longitude": 72.648638
+	},
+	"openingHoursSpecification": {
+		"@type": "OpeningHoursSpecification",
+		"dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+		"opens": "08:00",
+		"closes": "18:00"
+	}
+};
 ---
 
 <!doctype html>
@@ -41,10 +70,14 @@ const {
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 		
+		<!-- Structured Data: LocalBusiness -->
+		<script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+
 		<!-- Astro View Transitions -->
 		<ClientRouter />
 	</head>
 	<body class="bg-page-bg text-text-primary font-body antialiased min-h-screen flex flex-col">
 		<slot />
+		<WhatsAppFloat />
 	</body>
 </html>

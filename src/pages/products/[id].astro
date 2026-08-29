@@ -1,8 +1,10 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
+import { productImagesById, stockImages } from '../../assets/stock';
 
 // 1. Generate paths for all product pages
 export async function getStaticPaths() {
@@ -16,6 +18,13 @@ export async function getStaticPaths() {
 const { product } = Astro.props;
 const { data } = product;
 const { Content } = await render(product);
+const mainImage = productImagesById[product.id] ?? stockImages[0];
+
+// All other products (every product except the current one), in catalog order.
+const allProducts = await getCollection('products');
+const otherProducts = allProducts
+  .filter((p) => p.id !== product.id)
+  .sort((a, b) => a.data.order - b.data.order);
 ---
 
 <Layout 
@@ -43,10 +52,15 @@ const { Content } = await render(product);
           class="relative h-[440px] bg-panel-bg border border-border-hairline overflow-hidden group"
           style={`view-transition-name: product-card-${product.id};`}
         >
-          <img 
-            src="/istockphoto-518385254-1024x1024.jpg" 
-            alt={data.name} 
+          <Image
+            src={mainImage}
+            alt={data.name}
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            widths={[440, 880]}
+            sizes="(min-width: 1024px) 50vw, 100vw"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-page-bg via-transparent to-transparent opacity-60"></div>
           
@@ -56,24 +70,6 @@ const { Content } = await render(product);
               {data.name}
             </h1>
           </div>
-        </div>
-
-        <!-- Thumbnails row -->
-        <div class="grid grid-cols-4 gap-4">
-          {[
-            '/istockphoto-518385254-1024x1024.jpg',
-            '/istockphoto-537400206-1024x1024.jpg',
-            '/istockphoto-638272110-1024x1024.jpg',
-            '/istockphoto-646996026-1024x1024.jpg'
-          ].map((imgPath) => (
-            <div class="relative h-[80px] bg-panel-bg/40 border border-border-hairline overflow-hidden cursor-pointer hover:border-accent-vermillion transition-colors group">
-              <img 
-                src={imgPath} 
-                alt="Product thumbnail" 
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-80"
-              />
-            </div>
-          ))}
         </div>
       </div>
 
@@ -152,6 +148,39 @@ const { Content } = await render(product);
         </div>
       </div>
 
+    </div>
+
+    <!-- Explore Other Products -->
+    <div class="mt-24 pt-12 border-t border-border-hairline">
+      <h3 class="font-display font-bold text-2xl text-text-primary mb-6">Explore Other Products</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+        {otherProducts.map((p) => {
+          const img = productImagesById[p.id] ?? stockImages[0];
+          return (
+            <a
+              href={`/products/${p.id}`}
+              data-astro-prefetch
+              class="bg-panel-bg/40 border border-border-hairline rounded-[10px] overflow-hidden flex flex-col group hover:border-accent-vermillion transition-colors"
+            >
+              <div class="relative w-full h-[110px] bg-panel-bg overflow-hidden">
+                <Image
+                  src={img}
+                  alt={p.data.name}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                  decoding="async"
+                  widths={[220, 440]}
+                  sizes="220px"
+                />
+              </div>
+              <div class="p-3">
+                <div class="text-[10px] font-bold uppercase tracking-wider text-accent-gold mb-1">{p.data.category}</div>
+                <div class="text-sm font-semibold text-text-primary">{p.data.name}</div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
     </div>
   </main>
 

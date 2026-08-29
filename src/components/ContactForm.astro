@@ -1,11 +1,15 @@
 ---
+const godownLat = 23.022740;
+const godownLng = 72.648638;
+const mapEmbedSrc = `https://maps.google.com/maps?q=${godownLat},${godownLng}&z=16&output=embed`;
+const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${godownLat},${godownLng}`;
 ---
-<section id="contact" class="py-20 md:py-[120px] px-6 md:px-14 lg:px-[80px] bg-[oklch(0.99_0.003_95)]">
-  <div class="max-w-[1280px] mx-auto flex flex-col lg:flex-row gap-12 lg:gap-[72px]">
+<section id="contact" class="py-14 md:py-24 px-6 md:px-14 lg:px-[80px] bg-[oklch(0.99_0.003_95)]">
+  <div class="max-w-[1280px] mx-auto flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-[72px]">
     
     <!-- Left Column: Contact Info -->
     <div class="flex-1 w-full">
-      <span class="text-[13px] font-bold tracking-[2px] uppercase text-[oklch(0.52_0.07_240)] mb-[16px] block">
+      <span class="text-[13px] font-bold tracking-[2px] uppercase bg-[linear-gradient(95deg,oklch(0.62_0.19_35),oklch(0.52_0.07_240))] bg-clip-text text-transparent mb-[16px] block">
         GET IN TOUCH
       </span>
       <h2 class="font-display font-bold text-4xl md:text-[48px] tracking-[-1px] text-[oklch(0.22_0.03_250)] mb-[28px]">
@@ -14,10 +18,7 @@
       
       <div class="flex flex-col gap-[18px]">
         <div class="text-[15px] text-[oklch(0.42_0.02_250)]">
-          <span class="text-[oklch(0.22_0.03_250)] font-semibold">Office Address —</span> 32, Shyam Industrial Estate, Nr. Soni Ni Chali Cross Road, NH8, Odhav, Ahmedabad, Gujarat 382415
-        </div>
-        <div class="text-[15px] text-[oklch(0.42_0.02_250)]">
-          <span class="text-[oklch(0.22_0.03_250)] font-semibold">Godown Address —</span> 51/1, GIDC Estate, B/h. Balaji Hotel, Nr. Fire Station, Odhav, Ahmedabad, Gujarat 382415
+          <span class="text-[oklch(0.22_0.03_250)] font-semibold">Address —</span> 51/1, GIDC Estate, B/h. Balaji Hotel, Nr. Fire Station, Odhav, Ahmedabad, Gujarat 382415
         </div>
         <div class="text-[15px] text-[oklch(0.42_0.02_250)]">
           <span class="text-[oklch(0.22_0.03_250)] font-semibold">Phone —</span> +91 96382 55045 / +91 98250 31940
@@ -29,32 +30,53 @@
           <span class="text-[oklch(0.22_0.03_250)] font-semibold">Hours —</span> Mon–Sat, 8:00 AM – 6:00 PM
         </div>
       </div>
+
+      <!-- Map Embed -->
+      <div class="mt-[28px] border border-[oklch(0.87_0.012_240)] rounded-2xl overflow-hidden">
+        <iframe
+          src={mapEmbedSrc}
+          width="100%"
+          height="260"
+          style="border:0;"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Ashapura Enterprise godown location map"
+        ></iframe>
+      </div>
+      <a
+        href={directionsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 mt-4 px-5 py-2.5 border border-[oklch(0.72_0.015_240)] hover:border-[oklch(0.62_0.19_35)] hover:text-[oklch(0.62_0.19_35)] text-[oklch(0.22_0.03_250)] text-[13px] font-semibold rounded-[6px] transition-colors"
+      >
+        Get Directions &rarr;
+      </a>
     </div>
 
     <!-- Right Column: Form Container -->
-    <div class="flex-1 w-full bg-[oklch(0.965_0.008_240)] border border-[oklch(0.87_0.012_240)] p-[38px]">
+    <div class="flex-1 w-full bg-[oklch(0.965_0.008_240)] border border-[oklch(0.87_0.012_240)] rounded-2xl p-[38px]">
       <form class="flex flex-col gap-[16px]" onsubmit="event.preventDefault();">
-        <input 
-          type="text" 
-          placeholder="Your Name" 
-          class="p-[15px] bg-white border border-[oklch(0.82_0.012_240)] text-[oklch(0.22_0.03_250)] text-[14px] font-body focus:outline-none focus:border-[oklch(0.62_0.19_35)]" 
+        <input
+          type="text"
+          placeholder="Your Name"
+          class="p-[15px] bg-white border border-[oklch(0.82_0.012_240)] text-[oklch(0.22_0.03_250)] text-[14px] font-body rounded-[6px] focus:outline-none focus:border-[oklch(0.62_0.19_35)]"
         />
-        <input 
-          type="email" 
-          placeholder="Email Address" 
-          class="p-[15px] bg-white border border-[oklch(0.82_0.012_240)] text-[oklch(0.22_0.03_250)] text-[14px] font-body focus:outline-none focus:border-[oklch(0.62_0.19_35)]" 
+        <input
+          type="email"
+          placeholder="Email Address"
+          class="p-[15px] bg-white border border-[oklch(0.82_0.012_240)] text-[oklch(0.22_0.03_250)] text-[14px] font-body rounded-[6px] focus:outline-none focus:border-[oklch(0.62_0.19_35)]"
         />
-        <input 
-          type="tel" 
-          placeholder="Phone Number" 
-          class="p-[15px] bg-white border border-[oklch(0.82_0.012_240)] text-[oklch(0.22_0.03_250)] text-[14px] font-body focus:outline-none focus:border-[oklch(0.62_0.19_35)]" 
+        <input
+          type="tel"
+          placeholder="Phone Number"
+          class="p-[15px] bg-white border border-[oklch(0.82_0.012_240)] text-[oklch(0.22_0.03_250)] text-[14px] font-body rounded-[6px] focus:outline-none focus:border-[oklch(0.62_0.19_35)]"
         />
-        <textarea 
-          placeholder="Tell us what you need..." 
-          rows="4" 
-          class="p-[15px] bg-white border border-[oklch(0.82_0.012_240)] text-[oklch(0.22_0.03_250)] text-[14px] font-body resize-none focus:outline-none focus:border-[oklch(0.62_0.19_35)]"
+        <textarea
+          placeholder="Tell us what you need..."
+          rows="4"
+          class="p-[15px] bg-white border border-[oklch(0.82_0.012_240)] text-[oklch(0.22_0.03_250)] text-[14px] font-body rounded-[6px] resize-none focus:outline-none focus:border-[oklch(0.62_0.19_35)]"
         ></textarea>
-        <button 
+        <button
           type="submit" 
           class="p-[16px] bg-[oklch(0.62_0.19_35)] hover:bg-[oklch(0.54_0.19_33)] text-white text-center font-bold text-[15px] tracking-[0.3px] rounded-[6px] transition-colors cursor-pointer"
         >
