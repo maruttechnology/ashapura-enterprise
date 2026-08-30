@@ -1,0 +1,280 @@
+---
+import type { ProductChartConfig, ChartRow } from '../data/productCharts';
+
+interface Props {
+  chart?: ProductChartConfig;
+  title?: string;
+  rowHeader?: string;
+  columns?: string[];
+  columnUnit?: string;
+  unitDescription?: string;
+  note?: string;
+  rows?: ChartRow[];
+  className?: string;
+}
+
+const {
+  chart,
+  title = chart?.title ?? "Product Dimension & Weight Chart",
+  rowHeader = chart?.rowHeader ?? "Size (mm)",
+  columns = chart?.columns ?? [],
+  columnUnit = chart?.columnUnit ?? "mm",
+  unitDescription = chart?.unitDescription ?? "Values indicate standard nominal weight in kg per metre (kg/m)",
+  note = chart?.note ?? "* All weights are nominal values in kg/m (IS standard).",
+  rows = chart?.rows ?? [],
+  className = "",
+} = Astro.props;
+
+const hasTabs = Boolean(chart?.tabs && chart.tabs.length > 0);
+const tabs = chart?.tabs ?? [];
+---
+
+<div class={`product-weight-chart-container ${className}`} data-has-tabs={hasTabs ? "true" : "false"}>
+  
+  {hasTabs ? (
+    <div>
+      <!-- Multi-Tab Single-Line Header and Profile Switcher -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-3">
+        <div class="min-w-0">
+          <h3 id="active-chart-title" class="font-display font-bold text-lg md:text-xl text-[oklch(0.22_0.03_250)]">
+            {tabs[0]?.chart.title ?? title}
+          </h3>
+          <p id="active-chart-unit" class="text-xs text-[oklch(0.5_0.02_250)] mt-0.5">
+            {tabs[0]?.chart.unitDescription ?? unitDescription}
+          </p>
+        </div>
+
+        <!-- Tab Selector Buttons (Equal-width centered grid on mobile, inline flex on desktop) -->
+        <div class="w-full md:w-auto grid grid-cols-3 md:flex items-center gap-1 md:gap-1.5 p-1 bg-panel-bg rounded-[10px] border border-[oklch(0.87_0.012_240)] shrink-0" role="tablist">
+          {tabs.map((tab, idx) => (
+            <button
+              type="button"
+              role="tab"
+              data-tab-id={tab.id}
+              data-tab-title={tab.chart.title}
+              data-tab-unit={tab.chart.unitDescription}
+              aria-selected={idx === 0 ? "true" : "false"}
+              class={`chart-tab-btn w-full md:w-auto text-center px-2 sm:px-3 md:px-3.5 py-2 md:py-1.5 text-[11px] sm:text-xs font-bold rounded-[7px] transition-all cursor-pointer flex items-center justify-center ${
+                idx === 0 
+                  ? "bg-accent-vermillion text-white shadow-sm" 
+                  : "text-text-primary hover:text-accent-vermillion hover:bg-white/60"
+              }`}
+            >
+              <span>{tab.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- Tab Panes -->
+      {tabs.map((tab, idx) => {
+        const c = tab.chart;
+        const cols = c.columns ?? [];
+        const isWide = cols.length > 2;
+        return (
+          <div
+            id={`tab-panel-${tab.id}`}
+            role="tabpanel"
+            class={`chart-tab-panel transition-opacity duration-200 ${idx === 0 ? "block" : "hidden"}`}
+          >
+            {isWide && (
+              <div class="md:hidden mb-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-[oklch(0.62_0.19_35)] bg-[oklch(0.62_0.19_35)]/10 px-2.5 py-1 rounded-full w-fit">
+                <span>Scroll table horizontally</span>
+                <svg class="w-3.5 h-3.5 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </div>
+            )}
+
+            <!-- Table -->
+            <div class="border border-[oklch(0.87_0.012_240)] rounded-[14px] overflow-hidden shadow-xs bg-white">
+              <div class="overflow-x-auto overscroll-x-contain [scrollbar-width:thin]">
+                <table class={`w-full text-xs border-collapse ${isWide ? 'min-w-[540px]' : 'min-w-0'}`}>
+                  <thead>
+                    <tr class="bg-[oklch(0.965_0.008_240)] border-b border-[oklch(0.87_0.012_240)]">
+                      <th class={`sticky left-0 z-20 bg-[oklch(0.95_0.01_240)] text-[oklch(0.22_0.03_250)] font-extrabold uppercase tracking-wider p-3.5 text-left border-r border-[oklch(0.87_0.012_240)] shadow-[2px_0_4px_rgba(0,0,0,0.04)] ${isWide ? 'w-[110px]' : 'w-1/2'}`}>
+                        {c.rowHeader ?? 'Size'}
+                      </th>
+                      {cols.map((col) => (
+                        <th class="p-3.5 text-center font-bold text-[oklch(0.22_0.03_250)] border-r border-[oklch(0.87_0.012_240)] last:border-r-0">
+                          <span class="block text-sm font-extrabold">{col}</span>
+                          {c.columnUnit && (
+                            <span class="text-[10px] uppercase tracking-wider text-[oklch(0.5_0.02_250)] font-medium">
+                              {c.columnUnit}
+                            </span>
+                          )}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-[oklch(0.92_0.008_240)]">
+                    {c.rows.map((row, rIdx) => (
+                      <tr class={`transition-colors hover:bg-[oklch(0.985_0.003_95)] ${rIdx % 2 === 0 ? 'bg-white' : 'bg-[oklch(0.995_0.002_95)]'}`}>
+                        <td class="sticky left-0 z-10 bg-inherit font-display font-bold text-[oklch(0.22_0.03_250)] text-xs sm:text-sm p-3 sm:p-3.5 text-left border-r border-[oklch(0.87_0.012_240)] shadow-[2px_0_4px_rgba(0,0,0,0.04)] whitespace-nowrap">
+                          {row.label}
+                        </td>
+                        {cols.map((col) => {
+                          const val = row.values[col];
+                          return (
+                            <td class="p-3 sm:p-3.5 text-center border-r border-[oklch(0.92_0.008_240)] last:border-r-0">
+                              {val ? (
+                                <span class="font-bold text-xs sm:text-sm text-[#E30613] tracking-tight">
+                                  {val}
+                                </span>
+                              ) : (
+                                <span class="text-[oklch(0.75_0.01_240)] font-light">—</span>
+                              )}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Notes -->
+            {c.note && (
+              <div class="mt-3 flex flex-wrap items-center justify-between gap-2 text-[11px] text-[oklch(0.52_0.02_250)] px-1">
+                <span>{c.note}</span>
+                <span class="font-semibold text-[oklch(0.62_0.19_35)]">Custom profiles & lengths available on request</span>
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  ) : (
+    <div>
+      <!-- Single Table Section Title and Subheader -->
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-4 gap-2">
+        <div>
+          <h3 class="font-display font-bold text-lg md:text-xl text-[oklch(0.22_0.03_250)]">
+            {title}
+          </h3>
+          <p class="text-xs text-[oklch(0.5_0.02_250)] mt-0.5">
+            {unitDescription}
+          </p>
+        </div>
+        
+        {columns.length > 2 && (
+          <div class="md:hidden inline-flex items-center gap-1.5 text-[11px] font-semibold text-[oklch(0.62_0.19_35)] bg-[oklch(0.62_0.19_35)]/10 px-2.5 py-1 rounded-full w-fit">
+            <span>Scroll table horizontally</span>
+            <svg class="w-3.5 h-3.5 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </div>
+        )}
+      </div>
+
+      <!-- Single Table -->
+      <div class="border border-[oklch(0.87_0.012_240)] rounded-[14px] overflow-hidden shadow-xs bg-white">
+        <div class="overflow-x-auto overscroll-x-contain [scrollbar-width:thin]">
+          <table class={`w-full text-xs border-collapse ${columns.length > 2 ? 'min-w-[540px]' : 'min-w-0'}`}>
+            <thead>
+              <tr class="bg-[oklch(0.965_0.008_240)] border-b border-[oklch(0.87_0.012_240)]">
+                <th class={`sticky left-0 z-20 bg-[oklch(0.95_0.01_240)] text-[oklch(0.22_0.03_250)] font-extrabold uppercase tracking-wider p-3.5 text-left border-r border-[oklch(0.87_0.012_240)] shadow-[2px_0_4px_rgba(0,0,0,0.04)] ${columns.length > 2 ? 'w-[110px]' : 'w-1/2'}`}>
+                  {rowHeader}
+                </th>
+                {columns.map((col) => (
+                  <th class="p-3.5 text-center font-bold text-[oklch(0.22_0.03_250)] border-r border-[oklch(0.87_0.012_240)] last:border-r-0">
+                    <span class="block text-sm font-extrabold">{col}</span>
+                    {columnUnit && (
+                      <span class="text-[10px] uppercase tracking-wider text-[oklch(0.5_0.02_250)] font-medium">
+                        {columnUnit}
+                      </span>
+                    )}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[oklch(0.92_0.008_240)]">
+              {rows.map((row, idx) => (
+                <tr class={`transition-colors hover:bg-[oklch(0.985_0.003_95)] ${idx % 2 === 0 ? 'bg-white' : 'bg-[oklch(0.995_0.002_95)]'}`}>
+                  <td class="sticky left-0 z-10 bg-inherit font-display font-bold text-[oklch(0.22_0.03_250)] text-xs sm:text-sm p-3 sm:p-3.5 text-left border-r border-[oklch(0.87_0.012_240)] shadow-[2px_0_4px_rgba(0,0,0,0.04)] whitespace-nowrap">
+                    {row.label}
+                  </td>
+                  {columns.map((col) => {
+                    const val = row.values[col];
+                    return (
+                      <td class="p-3 sm:p-3.5 text-center border-r border-[oklch(0.92_0.008_240)] last:border-r-0">
+                        {val ? (
+                          <span class="font-bold text-xs sm:text-sm text-[#E30613] tracking-tight">
+                            {val}
+                          </span>
+                        ) : (
+                          <span class="text-[oklch(0.75_0.01_240)] font-light">—</span>
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Notes -->
+      {note && (
+        <div class="mt-3 flex flex-wrap items-center justify-between gap-2 text-[11px] text-[oklch(0.52_0.02_250)] px-1">
+          <span>{note}</span>
+          <span class="font-semibold text-[oklch(0.62_0.19_35)]">Custom specifications & lengths available on request</span>
+        </div>
+      )}
+    </div>
+  )}
+
+</div>
+
+<script>
+  function initChartTabs() {
+    const containers = document.querySelectorAll('.product-weight-chart-container[data-has-tabs="true"]');
+    
+    containers.forEach((container) => {
+      const tabButtons = container.querySelectorAll('.chart-tab-btn');
+      const tabPanels = container.querySelectorAll('.chart-tab-panel');
+
+      tabButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const targetTabId = btn.getAttribute('data-tab-id');
+          const targetTitle = btn.getAttribute('data-tab-title');
+          const targetUnit = btn.getAttribute('data-tab-unit');
+          if (!targetTabId) return;
+
+          // Update active state on buttons
+          tabButtons.forEach((b) => {
+            b.setAttribute('aria-selected', 'false');
+            b.classList.remove('bg-accent-vermillion', 'text-white', 'shadow-sm');
+            b.classList.add('text-text-primary', 'hover:text-accent-vermillion', 'hover:bg-white/60');
+          });
+
+          btn.setAttribute('aria-selected', 'true');
+          btn.classList.remove('text-text-primary', 'hover:text-accent-vermillion', 'hover:bg-white/60');
+          btn.classList.add('bg-accent-vermillion', 'text-white', 'shadow-sm');
+
+          // Update single-line title and unit in header
+          const titleEl = container.querySelector('#active-chart-title');
+          const unitEl = container.querySelector('#active-chart-unit');
+          if (titleEl && targetTitle) titleEl.textContent = targetTitle;
+          if (unitEl && targetUnit) unitEl.textContent = targetUnit;
+
+          // Show corresponding panel
+          tabPanels.forEach((panel) => {
+            if (panel.id === `tab-panel-${targetTabId}`) {
+              panel.classList.remove('hidden');
+              panel.classList.add('block');
+            } else {
+              panel.classList.remove('block');
+              panel.classList.add('hidden');
+            }
+          });
+        });
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initChartTabs);
+  document.addEventListener('astro:page-load', initChartTabs);
+</script>

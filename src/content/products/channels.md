@@ -6,7 +6,7 @@ description: "Mild Steel Channels (ISMC) are U-shaped structural steel sections.
 dimensions: "75x40mm to 400x100mm"
 grade: "IS 2062 E250 Gr. A/B, ASTM A36"
 standard: "IS 808, EN 10025"
-finish: "Hot Rolled Black, Hot-Dip Galvanized"
+finish: "Hot Rolled Black, Primer Coated"
 image: "/images/products/channels.jpg"
 order: 5
 ---
@@ -16,4 +16,4 @@ order: 5
 * Vehicle body framing (truck bodies, trailers, containers)
 * Support brackets for piping, HVAC, and electrical trays
 * Machine base frames and material handling equipment
-* Industrial staircases, walkways, and overhead cranes
+* Industrial staircases, walkways, and supporting structural frames

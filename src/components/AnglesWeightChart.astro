@@ -1,0 +1,13 @@
+---
+import ProductWeightChart from './ProductWeightChart.astro';
+import { productCharts } from '../data/productCharts';
+
+interface Props {
+  className?: string;
+}
+
+const { className = '' } = Astro.props;
+const anglesChart = productCharts['ms-angles'];
+---
+
+<ProductWeightChart chart={anglesChart} className={className} />

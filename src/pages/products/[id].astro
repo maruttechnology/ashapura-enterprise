@@ -4,6 +4,8 @@ import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
+import ProductWeightChart from '../../components/ProductWeightChart.astro';
+import { productCharts } from '../../data/productCharts';
 import { productImagesById, stockImages } from '../../assets/stock';
 
 // 1. Generate paths for all product pages
@@ -25,6 +27,9 @@ const allProducts = await getCollection('products');
 const otherProducts = allProducts
   .filter((p) => p.id !== product.id)
   .sort((a, b) => a.data.order - b.data.order);
+
+// Custom chart configuration if available for this product
+const chartConfig = productCharts[product.id];
 ---
 
 <Layout 
@@ -42,140 +47,130 @@ const otherProducts = allProducts
       <span class="group-hover:-translate-x-1 transition-transform">&larr;</span> Back to Product Catalog
     </a>
 
-    <!-- Detail Grid Layout -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+    <!-- Top Hero Section: Balanced 2-Column Split -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start mb-16">
       
-      <!-- Left Column: Gallery / Photo slots -->
-      <div class="flex flex-col gap-6">
+      <!-- Left Column: Photo -->
+      <div class="lg:col-span-5 flex flex-col gap-4">
         <!-- Main Product Image -->
         <div 
-          class="relative h-[440px] bg-panel-bg border border-border-hairline overflow-hidden group"
+          class="relative h-[360px] sm:h-[420px] lg:h-[460px] bg-panel-bg border border-[oklch(0.88_0.012_240)] rounded-[20px] shadow-[0_16px_40px_-12px_rgba(15,23,42,0.08),0_4px_12px_rgba(15,23,42,0.03)] overflow-hidden group"
           style={`view-transition-name: product-card-${product.id};`}
         >
           <Image
             src={mainImage}
             alt={data.name}
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             loading="eager"
             fetchpriority="high"
             decoding="async"
             widths={[440, 880]}
-            sizes="(min-width: 1024px) 50vw, 100vw"
+            sizes="(min-width: 1024px) 40vw, 100vw"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-page-bg via-transparent to-transparent opacity-60"></div>
+          <div class="absolute bottom-0 inset-x-0 h-[25%] bg-gradient-to-t from-black/80 via-black/35 to-transparent pointer-events-none"></div>
           
-          <div class="absolute bottom-6 left-6 z-10">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-accent-gold block mb-1">{data.category}</span>
-            <h1 class="font-display font-extrabold text-2xl md:text-3xl text-text-primary uppercase tracking-tight">
+          <div class="absolute bottom-6 left-6 right-6 z-10">
+            <span class="text-xs font-bold uppercase tracking-wider text-white/90 drop-shadow-sm block mb-1">{data.category}</span>
+            <h1 class="font-display font-extrabold text-2xl md:text-3xl text-white uppercase tracking-tight drop-shadow-md">
               {data.name}
             </h1>
           </div>
         </div>
       </div>
 
-      <!-- Right Column: Specs and Info -->
-      <div class="flex flex-col">
+      <!-- Right Column: Product Overview & Applications -->
+      <div class="lg:col-span-7 flex flex-col justify-start">
         <!-- Breadcrumb Category tag -->
-        <span class="text-xs font-bold tracking-[0.2em] uppercase text-accent-gold mb-3 block">
+        <span class="text-xs font-bold tracking-[0.2em] uppercase text-accent-gold mb-2.5 block">
           {data.category}
         </span>
         
         <!-- Product Name -->
         <h2 
-          class="font-display font-extrabold text-4xl md:text-5xl tracking-tight text-text-primary mb-6"
+          class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight text-text-primary mb-5"
           style={`view-transition-name: product-name-${product.id};`}
         >
           {data.name}
         </h2>
         
         <!-- Long Description -->
-        <p class="text-base leading-relaxed text-text-muted mb-8">
+        <p class="text-base leading-relaxed text-text-muted mb-6">
           {data.description}
         </p>
 
-        <!-- Dynamic Markdown content from MD body -->
-        <div class="prose prose-invert max-w-none text-sm text-text-muted mb-10 pb-8 border-b border-border-hairline">
+        <!-- Applications with Subheading & Bullet Points -->
+        <div class="prose max-w-none text-sm text-text-muted [&_h3]:font-display [&_h3]:font-bold [&_h3]:text-xl [&_h3]:text-[oklch(0.22_0.03_250)] [&_h3]:mb-3 [&_h3]:tracking-tight [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-2 [&_li]:text-text-muted [&_li::marker]:text-[oklch(0.62_0.19_35)]">
           <Content />
-        </div>
-
-        <!-- Specifications Table -->
-        <h3 class="font-display font-bold text-lg text-text-primary mb-4">Technical Specifications</h3>
-        <div class="border border-border-hairline/80 mb-10 overflow-hidden" style="border-radius: var(--btn-radius, 10px);">
-          <table class="w-full text-left text-xs">
-            <thead>
-              <tr class="bg-panel-bg border-b border-border-hairline">
-                <th class="p-4 font-bold uppercase tracking-wider text-accent-gold w-1/3">Property</th>
-                <th class="p-4 font-bold uppercase tracking-wider text-accent-gold">Details</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-border-hairline/50">
-              <tr>
-                <td class="p-4 font-semibold text-text-primary bg-panel-bg/25">Available Dimensions</td>
-                <td class="p-4 text-text-muted">{data.dimensions}</td>
-              </tr>
-              <tr>
-                <td class="p-4 font-semibold text-text-primary bg-panel-bg/25">Steel Grade</td>
-                <td class="p-4 text-text-muted">{data.grade}</td>
-              </tr>
-              <tr>
-                <td class="p-4 font-semibold text-text-primary bg-panel-bg/25">Governing Standard</td>
-                <td class="p-4 text-text-muted">{data.standard}</td>
-              </tr>
-              <tr>
-                <td class="p-4 font-semibold text-text-primary bg-panel-bg/25">Surface Finish</td>
-                <td class="p-4 text-text-muted">{data.finish}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Dual CTAs -->
-        <div class="flex flex-wrap gap-4">
-          <a 
-            href="/#contact" 
-            class="px-8 py-4 bg-accent-vermillion text-white font-bold text-sm hover:bg-opacity-80 active:scale-98 transition-all text-center flex-1 shadow-lg shadow-black/25"
-            style="border-radius: var(--btn-radius, 10px);"
-          >
-            Request Price Quote
-          </a>
-          <button 
-            onclick="alert('Specifications sheet download started... (Placeholder)')"
-            class="cursor-pointer px-8 py-4 border border-border-hairline text-text-primary font-semibold text-sm hover:border-text-primary active:scale-98 transition-all text-center flex-1"
-            style="border-radius: var(--btn-radius, 10px);"
-          >
-            Download Spec Sheet
-          </button>
         </div>
       </div>
 
     </div>
 
+    <!-- Middle Full-Width Section: Weight Chart or Specifications -->
+    <div class="mt-12 pt-12 border-t border-border-hairline">
+      {chartConfig ? (
+        <ProductWeightChart chart={chartConfig} />
+      ) : (
+        <div>
+          <h3 class="font-display font-bold text-lg md:text-xl text-text-primary mb-4">Technical Specifications</h3>
+          <div class="border border-border-hairline/80 overflow-hidden" style="border-radius: var(--btn-radius, 10px);">
+            <table class="w-full text-left text-xs">
+              <thead>
+                <tr class="bg-panel-bg border-b border-border-hairline">
+                  <th class="p-4 font-bold uppercase tracking-wider text-accent-gold w-1/3">Property</th>
+                  <th class="p-4 font-bold uppercase tracking-wider text-accent-gold">Details</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border-hairline/50">
+                <tr>
+                  <td class="p-4 font-semibold text-text-primary bg-panel-bg/25">Available Dimensions</td>
+                  <td class="p-4 text-text-muted">{data.dimensions}</td>
+                </tr>
+                <tr>
+                  <td class="p-4 font-semibold text-text-primary bg-panel-bg/25">Steel Grade</td>
+                  <td class="p-4 text-text-muted">{data.grade}</td>
+                </tr>
+                <tr>
+                  <td class="p-4 font-semibold text-text-primary bg-panel-bg/25">Governing Standard</td>
+                  <td class="p-4 text-text-muted">{data.standard}</td>
+                </tr>
+                <tr>
+                  <td class="p-4 font-semibold text-text-primary bg-panel-bg/25">Surface Finish</td>
+                  <td class="p-4 text-text-muted">{data.finish}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+    </div>
+
     <!-- Explore Other Products -->
     <div class="mt-24 pt-12 border-t border-border-hairline">
       <h3 class="font-display font-bold text-2xl text-text-primary mb-6">Explore Other Products</h3>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+      <div class="grid grid-cols-1 min-[480px]:grid-cols-2 md:grid-cols-4 gap-5">
         {otherProducts.map((p) => {
           const img = productImagesById[p.id] ?? stockImages[0];
           return (
             <a
               href={`/products/${p.id}`}
               data-astro-prefetch
-              class="bg-panel-bg/40 border border-border-hairline rounded-[10px] overflow-hidden flex flex-col group hover:border-accent-vermillion transition-colors"
+              class="bg-panel-bg/40 border border-border-hairline rounded-[12px] overflow-hidden flex flex-col group hover:border-accent-vermillion transition-colors"
             >
-              <div class="relative w-full h-[110px] bg-panel-bg overflow-hidden">
+              <div class="relative w-full h-[150px] min-[480px]:h-[120px] sm:h-[130px] bg-panel-bg overflow-hidden">
                 <Image
                   src={img}
                   alt={p.data.name}
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   loading="lazy"
                   decoding="async"
-                  widths={[220, 440]}
-                  sizes="220px"
+                  widths={[280, 560]}
+                  sizes="(min-width: 480px) 240px, 90vw"
                 />
               </div>
-              <div class="p-3">
-                <div class="text-[10px] font-bold uppercase tracking-wider text-accent-gold mb-1">{p.data.category}</div>
-                <div class="text-sm font-semibold text-text-primary">{p.data.name}</div>
+              <div class="p-4 sm:p-3.5">
+                <div class="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-accent-gold mb-1">{p.data.category}</div>
+                <div class="text-base sm:text-sm font-semibold text-text-primary">{p.data.name}</div>
               </div>
             </a>
           );
