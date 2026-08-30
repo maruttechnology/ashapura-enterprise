@@ -147,7 +147,8 @@ const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${godo
 <script>
   function initInquiryForm() {
     const form = document.getElementById('contact-inquiry-form') as HTMLFormElement | null;
-    if (!form) return;
+    if (!form || form.dataset.inquiryInitialized === 'true') return;
+    form.dataset.inquiryInitialized = 'true';
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
