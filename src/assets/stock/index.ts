@@ -1,6 +1,7 @@
 import aboutUs from './about-us.jpg';
 import anglesCloseup from './angles-closeup.jpg';
 import beamsStacked from './beams-stacked.jpg';
+import brightBar from './bright-bar.jpg';
 import channels from './channels.jpg';
 import construction from './construction.jpg';
 import engineering from './engineering.jpg';
@@ -20,6 +21,7 @@ export {
   aboutUs,
   anglesCloseup,
   beamsStacked,
+  brightBar,
   channels,
   construction,
   engineering,
@@ -40,7 +42,7 @@ export {
 export const productImagesById: Record<string, ImageMetadata> = {
   'ms-angles': anglesCloseup,
   'ms-pipes': squareTubesRacked,
-  'bright-bars': roundBarsBundle,
+  'bright-bars': brightBar,
   'square-bars': squareBars,
   channels: channels,
   'round-bars': roundBarsBundle,

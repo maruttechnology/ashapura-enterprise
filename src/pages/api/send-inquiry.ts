@@ -35,16 +35,16 @@ export const POST: APIRoute = async ({ request }) => {
       from: fromEmail,
       to: [toEmail],
       replyTo: email && email.includes('@') ? email : undefined,
-      subject: `New Steel Inquiry from ${name} (${phone})`,
+      subject: `Steel Inquiry & Rate Request - ${name} (${phone})`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background: #ffffff;">
           <div style="background: #141E37; padding: 24px 30px; color: #ffffff;">
             <h2 style="margin: 0; font-size: 20px; font-weight: 700; color: #ffffff;">Ashapura Enterprise</h2>
-            <p style="margin: 4px 0 0; font-size: 13px; color: #E30613; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">New Website Inquiry</p>
+            <p style="margin: 4px 0 0; font-size: 13px; color: #E30613; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Steel Quotation & Material Requirement</p>
           </div>
           
           <div style="padding: 30px; color: #334155;">
-            <p style="margin-top: 0; font-size: 15px; line-height: 1.5; color: #0f172a;">You have received a new quote request from your website contact form:</p>
+            <p style="margin-top: 0; font-size: 15px; line-height: 1.5; color: #0f172a;">A customer has submitted a new material requirement / quotation request:</p>
             
             <table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px;">
               <tr style="border-bottom: 1px solid #f1f5f9;">
@@ -52,7 +52,7 @@ export const POST: APIRoute = async ({ request }) => {
                 <td style="padding: 10px 0; font-weight: 700; color: #0f172a;">${name}</td>
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9;">
-                <td style="padding: 10px 0; font-weight: 600; color: #64748b;">Phone Number:</td>
+                <td style="padding: 10px 0; font-weight: 600; color: #64748b;">Contact Number:</td>
                 <td style="padding: 10px 0; font-weight: 700; color: #E30613;"><a href="tel:${phone}" style="color: #E30613; text-decoration: none;">${phone}</a></td>
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9;">
@@ -60,13 +60,14 @@ export const POST: APIRoute = async ({ request }) => {
                 <td style="padding: 10px 0; color: #0f172a;">${email || 'Not provided'}</td>
               </tr>
               <tr>
-                <td style="padding: 10px 0; font-weight: 600; color: #64748b; vertical-align: top;">Requirement:</td>
-                <td style="padding: 10px 0; color: #0f172a; line-height: 1.6; white-space: pre-wrap;">${message}</td>
+                <td style="padding: 10px 0; font-weight: 600; color: #64748b; vertical-align: top;">Material Requirement:</td>
+                <td style="padding: 10px 0; color: #0f172a; line-height: 1.6; white-space: pre-wrap; font-weight: 500;">${message}</td>
               </tr>
             </table>
 
-            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #f1f5f9; font-size: 12px; color: #94a3b8; text-align: center;">
-              Sent automatically from the Ashapura Enterprise website contact form.
+            <div style="margin-top: 26px; padding: 14px; background: #f8fafc; border-radius: 8px; font-size: 12px; color: #64748b; text-align: center; border: 1px solid #edf2f7;">
+              <strong style="color: #141E37; display: block; margin-bottom: 2px;">Ashapura Enterprise — Iron & Steel Merchant</strong>
+              51/1, GIDC Estate, Odhav, Ahmedabad | +91 98250 31940 / +91 96382 55045
             </div>
           </div>
         </div>
