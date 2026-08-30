@@ -6,7 +6,7 @@ description: "Mild Steel Flat Bars, locally known as Pata-Patti, are flat rectan
 dimensions: "12x3mm to 300x25mm"
 grade: "IS 2062 E250 Gr. A/B"
 standard: "IS 1730, EN 10058"
-finish: "Hot Rolled Black, Galvanized"
+finish: "Hot Rolled Black, Mill Finish"
 image: "/images/products/pata-patti.jpg"
 order: 7
 ---

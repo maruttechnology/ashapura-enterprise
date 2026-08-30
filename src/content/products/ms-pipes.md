@@ -6,7 +6,7 @@ description: "Mild Steel (M.S.) Pipes are manufactured using low carbon steel an
 dimensions: "15mm (1/2\") to 600mm (24\") NB"
 grade: "IS 1239 (Pt-I), IS 3589 Gr. 330/410, ASTM A53 Gr. B"
 standard: "IS 1161, IS 1239, IS 3589"
-finish: "Black, Hot-Dip Galvanized (GI), Threaded & Coupled, Plain Ended"
+finish: "Black, Threaded & Coupled, Plain Ended, Beveled Ended"
 image: "/images/products/ms-pipes.jpg"
 order: 2
 ---

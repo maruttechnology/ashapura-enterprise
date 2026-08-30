@@ -45,21 +45,21 @@ import logo from '../assets/logo.png';
 <!-- Mobile Navigation Side Drawer -->
 <div
   id="mobile-menu-drawer"
-  class="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm h-screen bg-[oklch(0.99_0.003_95)] border-l border-[oklch(0.87_0.012_240)] z-45 flex flex-col translate-x-full transition-transform duration-300 ease-in-out md:hidden shadow-2xl shadow-black/10"
+  class="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm h-[100dvh] max-h-[100dvh] bg-[oklch(0.99_0.003_95)] border-l border-[oklch(0.87_0.012_240)] z-45 flex flex-col translate-x-full transition-transform duration-300 ease-in-out md:hidden shadow-2xl shadow-black/10 overflow-y-auto overscroll-contain [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
 >
   <!-- Nav Links (top padding clears the fixed main nav bar above) -->
-  <div class="flex flex-col px-6 pt-24 pb-2">
-    <a href="/#about" class="mobile-nav-link text-base font-semibold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors py-4 border-b border-[oklch(0.92_0.008_240)]">About</a>
-    <a href="/#products" class="mobile-nav-link text-base font-semibold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors py-4 border-b border-[oklch(0.92_0.008_240)]">Products</a>
-    <a href="/#industries" class="mobile-nav-link text-base font-semibold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors py-4 border-b border-[oklch(0.92_0.008_240)]">Industries</a>
-    <a href="/#why" class="mobile-nav-link text-base font-semibold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors py-4 border-b border-[oklch(0.92_0.008_240)]">Why Us</a>
-    <a href="/#infrastructure" class="mobile-nav-link text-base font-semibold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors py-4 border-b border-[oklch(0.92_0.008_240)]">Facilities</a>
+  <div class="flex flex-col px-6 pt-20 pb-2">
+    <a href="/#about" class="mobile-nav-link text-[15px] font-semibold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors py-3.5 border-b border-[oklch(0.92_0.008_240)]">About</a>
+    <a href="/#products" class="mobile-nav-link text-[15px] font-semibold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors py-3.5 border-b border-[oklch(0.92_0.008_240)]">Products</a>
+    <a href="/#industries" class="mobile-nav-link text-[15px] font-semibold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors py-3.5 border-b border-[oklch(0.92_0.008_240)]">Industries</a>
+    <a href="/#why" class="mobile-nav-link text-[15px] font-semibold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors py-3.5 border-b border-[oklch(0.92_0.008_240)]">Why Us</a>
+    <a href="/#infrastructure" class="mobile-nav-link text-[15px] font-semibold text-[oklch(0.22_0.03_250)] hover:text-[oklch(0.62_0.19_35)] transition-colors py-3.5 border-b border-[oklch(0.92_0.008_240)]">Facilities</a>
   </div>
 
   <!-- Bottom-anchored CTA + Quick Contact -->
-  <div class="mt-auto px-6 py-6 border-t border-[oklch(0.87_0.012_240)] flex flex-col gap-3">
-    <a href="/#contact" class="mobile-nav-link w-full py-3.5 text-center bg-[oklch(0.62_0.19_35)] hover:bg-[oklch(0.54_0.19_33)] text-white font-bold text-sm uppercase tracking-wide rounded-[6px] transition-colors">Get a Quote</a>
-    <a href="tel:+919638255045" class="mobile-nav-link w-full py-3 text-center border border-[oklch(0.85_0.012_240)] text-[oklch(0.22_0.03_250)] font-semibold text-sm rounded-[6px] transition-colors">Call Us</a>
+  <div class="mt-auto px-6 py-5 border-t border-[oklch(0.87_0.012_240)] flex flex-col gap-2.5 shrink-0">
+    <a href="/#contact" class="mobile-nav-link w-full py-3 text-center bg-[oklch(0.62_0.19_35)] hover:bg-[oklch(0.54_0.19_33)] text-white font-bold text-sm uppercase tracking-wide rounded-[6px] transition-colors shadow-sm">Get a Quote</a>
+    <a href="tel:+919825031940" class="mobile-nav-link w-full py-2.5 text-center border border-[oklch(0.85_0.012_240)] text-[oklch(0.22_0.03_250)] font-semibold text-sm rounded-[6px] transition-colors">Call Us</a>
   </div>
 </div>
 
@@ -115,7 +115,8 @@ import logo from '../assets/logo.png';
           mobileBtn.children[0].classList.add('rotate-45', 'translate-y-2');
           mobileBtn.children[1].classList.add('opacity-0');
           mobileBtn.children[2].classList.add('-rotate-45', '-translate-y-2');
-          document.body.style.overflow = 'hidden'; // block backdrop scroll
+          document.documentElement.classList.add('overflow-hidden');
+          document.body.classList.add('overflow-hidden');
           if (whatsappFloat) {
             whatsappFloat.classList.add('opacity-0', 'pointer-events-none', 'scale-90');
           }
@@ -128,7 +129,8 @@ import logo from '../assets/logo.png';
           mobileBtn.children[0].classList.remove('rotate-45', 'translate-y-2');
           mobileBtn.children[1].classList.remove('opacity-0');
           mobileBtn.children[2].classList.remove('-rotate-45', '-translate-y-2');
-          document.body.style.overflow = '';
+          document.documentElement.classList.remove('overflow-hidden');
+          document.body.classList.remove('overflow-hidden');
           if (whatsappFloat) {
             whatsappFloat.classList.remove('opacity-0', 'pointer-events-none', 'scale-90');
           }
