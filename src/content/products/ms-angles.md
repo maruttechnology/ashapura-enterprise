@@ -6,7 +6,7 @@ description: "Mild Steel (M.S.) Angles are L-shaped structural steel sections us
 dimensions: "20x20x3mm to 200x200x25mm"
 grade: "IS 2062 E250 Gr. A/B, ASTM A36"
 standard: "IS 808, EN 10056"
-finish: "Hot Rolled Black, Galvanized, Primer Coated"
+finish: "Hot Rolled Black, Primer Coated"
 image: "/images/products/ms-angles.jpg"
 order: 1
 ---

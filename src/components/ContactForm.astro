@@ -21,10 +21,13 @@ const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${godo
           <span class="text-[oklch(0.22_0.03_250)] font-semibold">Address —</span> 51/1, GIDC Estate, B/h. Balaji Hotel, Nr. Fire Station, Odhav, Ahmedabad, Gujarat 382415
         </div>
         <div class="text-[15px] text-[oklch(0.42_0.02_250)]">
-          <span class="text-[oklch(0.22_0.03_250)] font-semibold">Phone —</span> +91 96382 55045 / +91 98250 31940
+          <span class="text-[oklch(0.22_0.03_250)] font-semibold">Phone —</span> <a href="tel:+919825031940" class="hover:text-[oklch(0.62_0.19_35)] transition-colors">+91 98250 31940</a>, <a href="tel:+919638255045" class="hover:text-[oklch(0.62_0.19_35)] transition-colors">+91 96382 55045</a>
         </div>
         <div class="text-[15px] text-[oklch(0.42_0.02_250)]">
-          <span class="text-[oklch(0.22_0.03_250)] font-semibold">Email —</span> ashapuraenterprise02@gmail.com
+          <span class="text-[oklch(0.22_0.03_250)] font-semibold">WhatsApp —</span> <a href="https://wa.me/918401840752?text=Hi%2C%20I%27d%20like%20a%20quote%20for%20steel%20products." target="_blank" rel="noopener noreferrer" class="hover:text-[oklch(0.62_0.19_35)] transition-colors">+91 84018 40752</a>
+        </div>
+        <div class="text-[15px] text-[oklch(0.42_0.02_250)]">
+          <span class="text-[oklch(0.22_0.03_250)] font-semibold">Email —</span> <a href="mailto:ashapuraenterprise02@gmail.com" class="hover:text-[oklch(0.62_0.19_35)] transition-colors">ashapuraenterprise02@gmail.com</a>
         </div>
         <div class="text-[15px] text-[oklch(0.42_0.02_250)]">
           <span class="text-[oklch(0.22_0.03_250)] font-semibold">Hours —</span> Mon–Sat, 8:00 AM – 6:00 PM
@@ -54,37 +57,172 @@ const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${godo
     </div>
 
     <!-- Right Column: Form Container -->
-    <div class="flex-1 w-full bg-[oklch(0.965_0.008_240)] border border-[oklch(0.87_0.012_240)] rounded-2xl p-[38px]">
-      <form class="flex flex-col gap-[16px]" onsubmit="event.preventDefault();">
-        <input
-          type="text"
-          placeholder="Your Name"
-          class="p-[15px] bg-white border border-[oklch(0.82_0.012_240)] text-[oklch(0.22_0.03_250)] text-[14px] font-body rounded-[6px] focus:outline-none focus:border-[oklch(0.62_0.19_35)]"
-        />
-        <input
-          type="email"
-          placeholder="Email Address"
-          class="p-[15px] bg-white border border-[oklch(0.82_0.012_240)] text-[oklch(0.22_0.03_250)] text-[14px] font-body rounded-[6px] focus:outline-none focus:border-[oklch(0.62_0.19_35)]"
-        />
-        <input
-          type="tel"
-          placeholder="Phone Number"
-          class="p-[15px] bg-white border border-[oklch(0.82_0.012_240)] text-[oklch(0.22_0.03_250)] text-[14px] font-body rounded-[6px] focus:outline-none focus:border-[oklch(0.62_0.19_35)]"
-        />
-        <textarea
-          placeholder="Tell us what you need..."
-          rows="4"
-          class="p-[15px] bg-white border border-[oklch(0.82_0.012_240)] text-[oklch(0.22_0.03_250)] text-[14px] font-body rounded-[6px] resize-none focus:outline-none focus:border-[oklch(0.62_0.19_35)]"
-        ></textarea>
+    <div class="flex-1 w-full bg-[oklch(0.965_0.008_240)] border border-[oklch(0.87_0.012_240)] rounded-2xl p-6 sm:p-[38px]">
+      <form id="contact-inquiry-form" class="flex flex-col gap-[16px]">
+        
+        <!-- Success Alert Banner -->
+        <div id="inquiry-success-banner" class="hidden p-4 bg-emerald-50 border border-emerald-300 rounded-[8px] text-emerald-900 text-xs sm:text-sm">
+          <div class="flex items-start gap-2.5">
+            <svg class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <strong class="font-bold block text-emerald-950">Inquiry Sent Successfully!</strong>
+              <p class="mt-0.5 text-emerald-800">Thank you! Your quote request has been received. Our sales desk will get back to you promptly.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Error Alert Banner -->
+        <div id="inquiry-error-banner" class="hidden p-4 bg-amber-50 border border-amber-300 rounded-[8px] text-amber-900 text-xs sm:text-sm">
+          <p id="inquiry-error-message">Unable to send email right now. Connecting via WhatsApp...</p>
+        </div>
+
+        <div>
+          <input
+            type="text"
+            id="inquiry-name"
+            name="name"
+            required
+            placeholder="Your Name *"
+            class="w-full p-[15px] bg-white border border-[oklch(0.82_0.012_240)] text-[oklch(0.22_0.03_250)] text-[14px] font-body rounded-[6px] focus:outline-none focus:border-[oklch(0.62_0.19_35)]"
+          />
+        </div>
+
+        <div>
+          <input
+            type="tel"
+            id="inquiry-phone"
+            name="phone"
+            required
+            placeholder="Phone Number *"
+            class="w-full p-[15px] bg-white border border-[oklch(0.82_0.012_240)] text-[oklch(0.22_0.03_250)] text-[14px] font-body rounded-[6px] focus:outline-none focus:border-[oklch(0.62_0.19_35)]"
+          />
+        </div>
+
+        <div>
+          <input
+            type="email"
+            id="inquiry-email"
+            name="email"
+            placeholder="Email Address (Optional)"
+            class="w-full p-[15px] bg-white border border-[oklch(0.82_0.012_240)] text-[oklch(0.22_0.03_250)] text-[14px] font-body rounded-[6px] focus:outline-none focus:border-[oklch(0.62_0.19_35)]"
+          />
+        </div>
+
+        <div>
+          <textarea
+            id="inquiry-message"
+            name="message"
+            required
+            placeholder="Tell us what you need (Product, Size, Quantity)... *"
+            rows="4"
+            class="w-full p-[15px] bg-white border border-[oklch(0.82_0.012_240)] text-[oklch(0.22_0.03_250)] text-[14px] font-body rounded-[6px] resize-none focus:outline-none focus:border-[oklch(0.62_0.19_35)]"
+          ></textarea>
+        </div>
+
         <button
           type="submit" 
-          class="p-[16px] bg-[oklch(0.62_0.19_35)] hover:bg-[oklch(0.54_0.19_33)] text-white text-center font-bold text-[15px] tracking-[0.3px] rounded-[6px] transition-colors cursor-pointer"
+          id="inquiry-submit-btn"
+          class="p-[16px] bg-[oklch(0.62_0.19_35)] hover:bg-[oklch(0.54_0.19_33)] text-white text-center font-bold text-[15px] tracking-[0.3px] rounded-[6px] transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-sm active:scale-[0.99]"
         >
-          Send Inquiry
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+          <span id="inquiry-btn-text">Send Inquiry</span>
         </button>
+
+        <div class="flex items-center justify-between text-[12px] text-text-muted px-1">
+          <span>* Required fields</span>
+          <a href="mailto:ashapuraenterprise02@gmail.com" class="hover:text-accent-vermillion hover:underline">
+            Or email us directly &rarr;
+          </a>
+        </div>
       </form>
     </div>
 
   </div>
 </section>
+
+<script>
+  function initInquiryForm() {
+    const form = document.getElementById('contact-inquiry-form') as HTMLFormElement | null;
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const nameInput = document.getElementById('inquiry-name') as HTMLInputElement | null;
+      const phoneInput = document.getElementById('inquiry-phone') as HTMLInputElement | null;
+      const emailInput = document.getElementById('inquiry-email') as HTMLInputElement | null;
+      const messageInput = document.getElementById('inquiry-message') as HTMLTextAreaElement | null;
+      const successBanner = document.getElementById('inquiry-success-banner');
+      const errorBanner = document.getElementById('inquiry-error-banner');
+      const errorMsg = document.getElementById('inquiry-error-message');
+      const submitBtn = document.getElementById('inquiry-submit-btn') as HTMLButtonElement | null;
+      const btnText = document.getElementById('inquiry-btn-text');
+
+      const name = nameInput?.value.trim() || '';
+      const phone = phoneInput?.value.trim() || '';
+      const email = emailInput?.value.trim() || '';
+      const message = messageInput?.value.trim() || '';
+
+      if (!name || !phone || !message) {
+        alert('Please fill in your Name, Phone Number, and Requirement.');
+        return;
+      }
+
+      // Hide previous alerts
+      successBanner?.classList.add('hidden');
+      errorBanner?.classList.add('hidden');
+
+      // Loading state
+      if (submitBtn) submitBtn.disabled = true;
+      if (btnText) btnText.textContent = 'Sending Inquiry...';
+
+      // WhatsApp URL formatting
+      const formattedText = 
+`*New Steel Inquiry - Ashapura Enterprise*
+• *Name:* ${name}
+• *Phone:* ${phone}
+• *Email:* ${email || 'Not specified'}
+• *Requirement:* ${message}`;
+      const waUrl = `https://wa.me/918401840752?text=${encodeURIComponent(formattedText)}`;
+
+      try {
+        // Send email via Serverless API (Resend)
+        const res = await fetch('/api/send-inquiry', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, phone, email, message }),
+        });
+
+        const json = await res.json();
+
+        if (res.ok && json.success) {
+          successBanner?.classList.remove('hidden');
+          form.reset();
+        } else {
+          if (errorBanner && errorMsg) {
+            errorMsg.textContent = json.error || 'Failed to send inquiry. Please try again or email us directly.';
+            errorBanner.classList.remove('hidden');
+          }
+        }
+      } catch (err) {
+        console.error('Inquiry submission error:', err);
+        if (errorBanner && errorMsg) {
+          errorMsg.textContent = 'Network error. Please try again or contact us directly.';
+          errorBanner.classList.remove('hidden');
+        }
+      } finally {
+        // Reset submit button
+        if (submitBtn) submitBtn.disabled = false;
+        if (btnText) btnText.textContent = 'Send Inquiry';
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initInquiryForm);
+  document.addEventListener('astro:page-load', initInquiryForm);
+</script>
 
